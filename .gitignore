@@ -1,0 +1,13 @@
+*.log
+*.tmp
+*.bak
+Thumbs.db
+desktop.ini
+__pycache__/
+dist/
+.local-backups/
+publishedfileid.lua
+itemversion.lua
+tests/last-validation.json
+.dev-deps/
+*.zip
