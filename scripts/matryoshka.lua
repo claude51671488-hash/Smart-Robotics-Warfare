@@ -50,9 +50,13 @@ local function updateGun(id,bot,cfg,dt)
         return a.Id<b.Id
     end)
     bot.Target=nil
+    local track,ranging=bot.AimTrack,bot.RangingShots
     -- An obstructed group must not hide every reachable target behind it.
     -- The sorted list still gives all enemy weapons priority over devices.
     for _,target in ipairs(candidates) do
+        -- AimSolution updates tracking. A rejected candidate must not erase
+        -- the selected target's previous position before its own calculation.
+        bot.AimTrack=track;bot.RangingShots=ranging
         local aim,spread,worthwhile=SRW.AimSolution(id,bot,cfg,target,dt,false)
         if worthwhile and SRW.ShotClearsTerrain(id,cfg,aim) and SRW.CanAimRobotWeapon(id,cfg,aim) then
             bot.Target=target.Id
@@ -69,6 +73,7 @@ local function updateGun(id,bot,cfg,dt)
             return
         end
     end
+    bot.AimTrack=nil;bot.RangingShots=0
     bot.BurstRemaining=nil
 end
 

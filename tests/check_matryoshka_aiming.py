@@ -85,5 +85,24 @@ for _,team in ipairs({101,102}) do
  blocked[600]=nil;SRW.UpdateCapsules(.04)
  assert(bot.Target==1 and shots==3,'turret did not reacquire the newly clear weapon')
 end
+-- Rejected candidates must not overwrite the selected target's motion history.
+for _,direction in ipairs({1,-1}) do
+ local team=direction==1 and 101 or 102
+ local near,far=300+direction*300,300+direction*1100
+ entries={{Id=1,Position=Vec3(near,-90)},{Id=9,Position=Vec3(far,-90)}}
+ blocked={[near]=true};devices[100].Team=team
+ devices[100].Muzzle=Vec3(300+direction*50,-90)
+ local bot={Team=team,Direction=direction,DeployAge=cfg.DeploySeconds,Deployed=true,FireWait=0}
+ data.srw.CapsuleTurrets={[100]=bot};shots=0
+ SRW.UpdateCapsules(.04)
+ entries[2].Position=Vec3(far+direction*20,-90);bot.FireWait=0
+ SRW.UpdateCapsules(.04)
+ assert(bot.AimTrack.Id==9 and math.abs(bot.AimTrack.VX-direction*500)<.001,
+  'blocked candidate erased the moving target velocity')
+ local static=SRW.DirectBarrelTarget(100,cfg,entries[2].Position)
+ assert((last.x-static.x)*direction>0,'turret did not lead a moving weapon behind a blocked candidate')
+ entries={};SRW.UpdateCapsules(.04)
+ assert(bot.AimTrack==nil,'lost target retained motion history')
+end
 ''')
-print('PASS: Matryoshka muzzle/head rebasing, close/elevated rear shots, ninth-target acquisition, blocked-weapon fallback and reacquisition on both sides')
+print('PASS: Matryoshka muzzle/head rebasing, close/elevated rear shots, ninth-target acquisition, blocked-weapon fallback, reacquisition, moving-target lead and tracking cleanup')

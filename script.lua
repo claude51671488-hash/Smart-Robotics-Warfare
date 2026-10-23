@@ -1,7 +1,7 @@
 -- Forts loads this entry point for an enabled mod.
 dofile("scripts/forts.lua")
 
-SRW = { Version = "0.54.4-matryoshka-targeting" }
+SRW = { Version = "0.54.5-matryoshka-tracking" }
 dofile(path .. "/scripts/config.lua")
 dofile(path .. "/scripts/robots/layout.lua")
 dofile(path .. "/scripts/combat/aiming.lua")
