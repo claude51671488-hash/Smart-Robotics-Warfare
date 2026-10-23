@@ -75,9 +75,12 @@
   "updated_date": "2026-10-23",
   "requested_revision": {
     "id": "02_telescope_v2",
-    "art_direction": "less high-tech, rough industrial mechanics, olive steel, large bolts, no glowing electronics",
-    "status": "art brief only; no revised image generated",
-    "brief": "MATRYOSHKA_V2_BRIEF.md"
+    "art_direction": "same visual family as Kolokol Bastion V3: weathered olive paint, graphite steel, coarse angular armor, large bolts, red markings",
+    "status": "clarified art brief; corrected image and animation not generated",
+    "brief": "MATRYOSHKA_V2_BRIEF.md",
+    "visual_reference": "../images/02_bastion_v3.png",
+    "transformation_reference": "suitcase-like sequential panel unfolding only; no superhero visual styling",
+    "transformation_goal": "small packed capsule unfolds supports, extends nested sections and deploys its head into a larger turret"
   },
   "flight_animation": {
     "file": "flight-animation/matryoshka_flight_deploy.gif",
@@ -85,6 +88,7 @@
     "manifest": "flight-animation/manifest.json",
     "source_concept": "02_telescope",
     "frames": 140,
-    "duration_ms": 7000
+    "duration_ms": 7000,
+    "art_direction_status": "preliminary earlier design; does not implement clarified Bastion styling"
   }
 }
