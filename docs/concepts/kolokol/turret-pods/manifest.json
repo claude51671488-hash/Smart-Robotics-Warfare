@@ -69,5 +69,14 @@
       "name": "Панцирь",
       "file": "images/05_bunker.png"
     }
-  ]
+  ],
+  "selected_direction": "02_telescope",
+  "selected_name": "Матрёшка",
+  "updated_date": "2026-10-23",
+  "requested_revision": {
+    "id": "02_telescope_v2",
+    "art_direction": "less high-tech, rough industrial mechanics, olive steel, large bolts, no glowing electronics",
+    "status": "art brief only; no revised image generated",
+    "brief": "MATRYOSHKA_V2_BRIEF.md"
+  }
 }

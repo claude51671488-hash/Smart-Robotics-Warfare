@@ -107,7 +107,11 @@
   "turret_pods": {
     "concept_count": 5,
     "manifest": "turret-pods/manifest.json",
-    "readme": "turret-pods/README.md"
+    "readme": "turret-pods/README.md",
+    "selected_direction": "02_telescope",
+    "requested_revision": "02_telescope_v2",
+    "revision_status": "art brief only; no revised image",
+    "brief": "turret-pods/MATRYOSHKA_V2_BRIEF.md"
   },
   "supporting_animation_assets": [
     {
