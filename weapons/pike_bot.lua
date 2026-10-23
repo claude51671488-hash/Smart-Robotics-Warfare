@@ -1,0 +1,9 @@
+dofile(path.."/weapons/tank_rockets.lua")
+Scale=0.65
+HitPoints=1300
+Projectile="srw_pike_rocket"
+RoundsEachBurst=1
+ReloadTime=5
+MinFireSpeed=6000
+MaxFireSpeed=6000.1
+MaxFireRadius=19000.0

@@ -1,0 +1,10 @@
+dofile(path.."/weapons/tank_rockets.lua")
+Scale=0.18
+HitPoints=250
+Projectile="srw_sentry_rocket"
+RoundsEachBurst=2
+RoundPeriod=0.2
+ReloadTime=4
+MinFireSpeed=3500
+MaxFireSpeed=3500.1
+MaxFireRadius=11200.0

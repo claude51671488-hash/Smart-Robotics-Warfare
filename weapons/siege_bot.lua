@@ -1,0 +1,27 @@
+-- Hammer: variable-power high-angle siege fire; temporary cannon artwork.
+dofile("weapons/cannon.lua")
+Sprites={}
+Scale=0.65
+HitPoints=900
+WeaponMass=120
+Repairable=true
+RecessionBox=nil
+Projectile="srw_hammer_shell"
+ReloadTime=8
+MinFireSpeed=800
+MaxFireSpeed=13000.0
+MinFireAngle=45
+MaxFireAngle=135
+MinFireRadius=500
+FireStdDev=0.002
+FireStdDevAuto=0.002
+MaxFireRadius=44000.0
+MinFireClearance=0
+EnergyFireCost=0
+MetalFireCost=0
+Recoil=0
+DeviceSplashDamage=0
+StructureSplashDamage=0
+IncendiaryRadius=0
+IncendiaryRadiusHeated=0
+IgnitePlatformOnDestruct=false

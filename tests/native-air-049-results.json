@@ -1,0 +1,94 @@
+{
+  "version": "0.49.0-archangel",
+  "completed": true,
+  "shots": [
+    {
+      "team": "1",
+      "ammo": "srw_archangel_bullet",
+      "weapon": "84",
+      "count": 41
+    },
+    {
+      "team": "1",
+      "ammo": "srw_archangel_bullet",
+      "weapon": "85",
+      "count": 41
+    },
+    {
+      "team": "1",
+      "ammo": "native beam (empty projectile save name)",
+      "weapon": "83",
+      "count": 2
+    },
+    {
+      "team": "1",
+      "ammo": "srw_archangel_rocket",
+      "weapon": "86",
+      "count": 6
+    },
+    {
+      "team": "2",
+      "ammo": "srw_archangel_bullet",
+      "weapon": "88",
+      "count": 41
+    },
+    {
+      "team": "2",
+      "ammo": "srw_archangel_bullet",
+      "weapon": "89",
+      "count": 41
+    },
+    {
+      "team": "2",
+      "ammo": "native beam (empty projectile save name)",
+      "weapon": "87",
+      "count": 2
+    },
+    {
+      "team": "2",
+      "ammo": "srw_archangel_rocket",
+      "weapon": "90",
+      "count": 15
+    }
+  ],
+  "controlled_threats": [
+    {
+      "node": "154",
+      "destruction": [
+        "2",
+        "126"
+      ]
+    },
+    {
+      "node": "186",
+      "destruction": [
+        "2",
+        "323"
+      ]
+    },
+    {
+      "node": "244",
+      "destruction": [
+        "2",
+        "954"
+      ]
+    },
+    {
+      "node": "279",
+      "destruction": [
+        "2",
+        "1285"
+      ]
+    }
+  ],
+  "aircraft_hits": [],
+  "last_targets": [
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99228084087372",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.9919615983963"
+  ],
+  "limits": [
+    "Native isolated combat scene with durable stationary ground targets and controlled incoming projectiles.",
+    "Factory upgrade/state migration and UI tier filtering verified in automatic fixtures, not a full native construction/UI playthrough.",
+    "Network desync repair requires an independent-client retest; this scene is local."
+  ]
+}

@@ -1,0 +1,27 @@
+dofile("devices/explosivebarrel.lua")
+Scale=.30
+HitPoints=100
+Mass=10
+ClaimsStructures=false
+NoReclaim=true
+Repairable=false
+EnergyStorageCapacity=0
+MetalStorageCapacity=0
+EnergyProductionRate=0
+MetalProductionRate=0
+DeviceSplashDamage=1400
+StructureSplashDamage=900
+DeviceSplashDamageMaxRadius=450
+StructureSplashDamageMaxRadius=450
+DeviceSplashDamageDelay=0
+IncendiaryRadius=0
+IncendiaryRadiusHeated=0
+IgnitePlatformOnDestruct=false
+Sprites={}
+SelectionWidth=190
+SelectionHeight=65
+SelectionOffset={0,-65}
+NodeEffects={}
+Root={Name="Mine",Sprite=path.."/ui/textures/engineering/animated/mine_01.png",
+    Pivot={0,-.39},PivotOffset={0,0},Angle=0}
+DestroyEffect=path.."/effects/field_mine_explode.lua"

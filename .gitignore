@@ -11,3 +11,11 @@ itemversion.lua
 tests/last-validation.json
 .dev-deps/
 *.zip
+art-source/
+ui/textures/projectiles/user_shell.png
+.env*
+*.pem
+*.key
+*.pfx
+*.exe
+*.dll

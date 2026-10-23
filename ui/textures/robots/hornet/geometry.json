@@ -1,0 +1,15 @@
+{
+  "Width": 384.0,
+  "Height": 192.0,
+  "Scale": 1,
+  "JointX": 192.0,
+  "JointY": 140.0,
+  "MuzzleX": 280.0,
+  "MuzzleY": 96,
+  "PodTopY": 79.5,
+  "PodFootY": 96,
+  "MountX": -23.5,
+  "MountY": -85.0,
+  "FrameCount": 8,
+  "FrameSeconds": 0.035
+}

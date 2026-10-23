@@ -1,0 +1,72 @@
+{
+  "version": "0.48.0-parcel",
+  "completed": true,
+  "bombs_dropped": 6,
+  "bomb_target_hits": 6,
+  "aircraft_hits": [],
+  "interception_events": [
+    "[SRW AIR PROBE] THREAT_END node=142 cause=3 frame=228 shotdown=nil terrain=4",
+    "[SRW AIR PROBE] THREAT_END node=143 cause=3 frame=299 shotdown=nil terrain=4",
+    "[SRW AIR PROBE] THREAT_END node=144 cause=3 frame=553 shotdown=nil terrain=4",
+    "[SRW AIR PROBE] THREAT_END node=145 cause=3 frame=621 shotdown=nil terrain=4"
+  ],
+  "emp_checks": [
+    "[SRW AIR PROBE] EMP_HELD delta=0,0",
+    "[SRW AIR PROBE] EMP_HELD delta=0,0"
+  ],
+  "target_hp": [
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99984002113342",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99976164102554",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99976164102554",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99970561265945",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=1",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99984002113342",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99976164102554",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99976164102554",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99970561265945",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=1 hp=0.99952322244644",
+    "[SRW AIR PROBE] TARGET_HP side=2 hp=0.99952322244644"
+  ],
+  "errors": [
+    "LIBCURL error: FTP: couldn't retrieve (RETR failed) the specified file",
+    "LIBCURL error: FTP: couldn't retrieve (RETR failed) the specified file"
+  ],
+  "limitations": [
+    "Controlled native scene with stationary durable targets, not prolonged mass combat.",
+    "For Parcel return/service, diagnostic anchors are presented as allied air factories through the probe target wrapper; actual production and factory loss/replacement are covered by automated fixtures.",
+    "Interception evidence is destruction cause 3 before projectile lifetime, correlated with laser shots; named DESTROYTYPE_SHOTDOWN is unavailable."
+  ]
+}

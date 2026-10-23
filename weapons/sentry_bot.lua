@@ -1,0 +1,9 @@
+dofile(path.."/weapons/aa_bot.lua")
+Scale=0.7
+HitPoints=850
+Projectile="srw_sentry_bullet"
+ReloadTime=0.8
+ReloadTimeIncludesBurst=false
+RoundsEachBurst=3
+RoundPeriod=0.1
+MaxFireRadius=9600.0

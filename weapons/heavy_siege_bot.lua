@@ -1,0 +1,10 @@
+dofile(path.."/weapons/siege_bot.lua")
+Scale=0.95
+HitPoints=2200
+WeaponMass=300
+Projectile="srw_heavy_siege_he"
+ReloadTime=12
+MinFireSpeed=1000
+MaxFireSpeed=15000.0
+MinFireRadius=900
+MaxFireRadius=60000.0

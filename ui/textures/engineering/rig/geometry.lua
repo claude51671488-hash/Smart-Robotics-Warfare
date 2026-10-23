@@ -1,0 +1,1 @@
+SRWBunkerRigGeometry={cannon={Width=1536,Height=512,MuzzleY=388.91769120846584,Scale=0.52,JointY=388.91769120846584,MuzzleX=1266.55,JointX=718.55,LoadingFrames=48,FootX=510,FootY=480,},machinegun={Width=1536,Height=512,MuzzleY=315.10611169652265,Scale=0.25,JointY=315.10611169652265,MuzzleX=905.5,JointX=253.5,LoadingFrames=48,FootX=369,FootY=480,},}

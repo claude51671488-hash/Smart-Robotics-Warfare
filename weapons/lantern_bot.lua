@@ -1,0 +1,9 @@
+dofile(path.."/weapons/hunter_interceptor.lua")
+Scale=.3
+HitPoints=850
+Projectile="srw_lantern_beam"
+ReloadTime=1.5
+BeamDuration=1.2
+BeamEndEffectTime=.05
+MaxFireRadius=7200
+BeamTable={{0,2,100},{1.15,2,100},{1.2,0,0}}

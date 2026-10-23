@@ -1,0 +1,12 @@
+dofile(path.."/weapons/laser_bot.lua")
+Scale=0.2
+HitPoints=350
+NoReclaim=true
+Projectile="srw_hunter_intercept_beam"
+ReloadTime=1.5
+FireDelay=0
+BeamDuration=0.25
+BeamEndEffectTime=0.05
+MinFireRadius=0
+MaxFireRadius=6000.0
+BeamTable={{0,2,100},{0.2,2,100},{0.25,0,0}}

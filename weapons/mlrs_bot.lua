@@ -1,0 +1,15 @@
+dofile(path.."/weapons/rocket_bot.lua")
+ForceFireAngle=nil
+CanFlip=true
+Projectile="srw_mlrs_rocket"
+HitPoints=3200
+Scale=.65
+ReloadTime=10
+RoundsEachBurst=6
+RoundPeriod=.2
+MinFireSpeed=1000
+MaxFireSpeed=15000
+MinFireAngle=45
+MaxFireAngle=135
+MinFireRadius=900
+MaxFireRadius=52000

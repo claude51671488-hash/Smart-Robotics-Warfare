@@ -1,0 +1,26 @@
+{
+  "shots": {
+    "1:srw_skat_bullet": 26,
+    "1:srw_skat_rocket": 18,
+    "2:srw_skat_bullet": 27,
+    "2:srw_skat_rocket": 18,
+    "1:srw_hornet_bullet": 21,
+    "1:srw_hornet_rocket": 6,
+    "2:srw_hornet_bullet": 21,
+    "2:srw_hornet_rocket": 6
+  },
+  "hits": {
+    "1:srw_skat_bullet": 26,
+    "1:srw_skat_rocket": 16,
+    "2:srw_skat_bullet": 27,
+    "2:srw_skat_rocket": 16,
+    "1:srw_hornet_bullet": 21,
+    "2:srw_hornet_bullet": 19,
+    "2:srw_hornet_rocket": 2,
+    "2:mortar": 1,
+    "1:mortar": 1
+  },
+  "self_hits": [],
+  "done": true,
+  "emp_held": 2
+}

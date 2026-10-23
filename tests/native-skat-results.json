@@ -1,0 +1,32 @@
+{
+  "1:bullet": {
+    "shots": 32,
+    "hits": 32,
+    "weapons": [
+      "83"
+    ]
+  },
+  "1:rocket": {
+    "shots": 18,
+    "hits": 18,
+    "weapons": [
+      "84",
+      "85"
+    ]
+  },
+  "2:bullet": {
+    "shots": 36,
+    "hits": 36,
+    "weapons": [
+      "86"
+    ]
+  },
+  "2:rocket": {
+    "shots": 18,
+    "hits": 18,
+    "weapons": [
+      "87",
+      "88"
+    ]
+  }
+}
