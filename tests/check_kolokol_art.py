@@ -13,6 +13,7 @@ assert g.HitPoints==250 and g.WeaponMass==100 and g.ReloadTime==10 and g.MaxFire
 assert g.EnergyFireCost==500 and g.MetalFireCost==30
 geo=json.loads((r/'ui/textures/weapons/kolokol/geometry.json').read_text())
 assert 1.248<geo['ExtensionRatio']<1.251
+assert geo['Scale']==.65 and g.Scale==.65
 root=g.Root;head=root.ChildrenBehind[1];barrel=head.ChildrenInFront[1]
 assert root.UserData==0 and root.Name=='KolokolFixedBase'
 assert head.UserData==50 and barrel.UserData==100
@@ -33,7 +34,7 @@ for facing in (1,-1):
         angle=math.radians(elevation)
         x=facing*geo['BoreLength']*math.cos(angle);y=-geo['BoreLength']*math.sin(angle)
         assert x*facing>0 and y<0
-assert len(g.dlc2_Ammunition)==2
+assert len(g.dlc2_Ammunition)==3
 for name in ('base','barrel','empty','he','incendiary','icon'):
     b=(r/'ui/textures/weapons/kolokol'/f'{name}.png').read_bytes()
     assert b[:8]==b'\x89PNG\r\n\x1a\n' and b[25]==6,name

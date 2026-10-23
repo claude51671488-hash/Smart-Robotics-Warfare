@@ -62,5 +62,5 @@ selectedId=-1; SRW.RefreshUI(); assert(not visible.srw_page and not visible.srw_
 Projectiles={{SaveName="machinegun",ProjectileDamage=1,Effects={test=1}}}
 ''')
 lua.execute((root/'weapons/projectile_list.lua').read_text(encoding='utf-8'))
-lua.execute('assert(#Projectiles==15 and Projectiles[2].AntiAirDamage==80 and Projectiles[2].Gravity==981 and Projectiles[1].ProjectileDamage==1)')
+lua.execute('assert(#Projectiles==16 and Projectiles[2].AntiAirDamage==80 and Projectiles[2].Gravity==981 and Projectiles[1].ProjectileDamage==1)')
 print('PASS: AA production, lead, cooldown, allied/dead/non-interceptable targets, EMP, range, escort, capacity and menu pages')

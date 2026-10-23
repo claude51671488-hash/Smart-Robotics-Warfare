@@ -9,6 +9,8 @@ function SRW.EnsureState()
     state.Factories = state.Factories or {}
     state.Projectiles = state.Projectiles or {}
     state.GuidedMissiles = state.GuidedMissiles or {}
+    state.CapsuleFlights = state.CapsuleFlights or {}
+    state.CapsuleTurrets = state.CapsuleTurrets or {}
     state.Shields = state.Shields or {}
     state.ShieldProjectiles = state.ShieldProjectiles or {}
     return state

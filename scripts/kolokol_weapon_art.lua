@@ -11,7 +11,7 @@ Sprites={
     {Name="srw-kolokol-barrel",States=still("barrel")},
 }
 Scale=g.Scale
-SelectionWidth=190;SelectionHeight=210;SelectionOffset={0,-100}
+SelectionWidth=247;SelectionHeight=273;SelectionOffset={0,-130}
 local rigScale=g.Scale/.375
 BarrelLength=0
 BarrelRecoilLimit=-.018;BarrelRecoilSpeed=-.45;BarrelReturnForce=.1

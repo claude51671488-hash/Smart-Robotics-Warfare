@@ -10,7 +10,7 @@ for name in ['weapons/weapon_list.lua','weapons/projectile_list.lua']:
     code=(root/name).read_text(encoding='utf-8')
     lua.execute(code); lua.execute(code)
 lua.execute('''
-assert(#Weapons==66 and Weapons[1].BuildOnGroundOnly and Weapons[1].dlc2_BuildAnywhere)
+assert(#Weapons==67 and Weapons[1].BuildOnGroundOnly and Weapons[1].dlc2_BuildAnywhere)
 assert(#Projectiles==14 and Projectiles[1].ProjectileDamage==999 and Projectiles[2].ProjectileDamage==1400)
 assert(Projectiles[2].Gravity==981 and Projectiles[2].ExplodeOnTouch)
 assert(Projectiles[2].ProjectileSplashDamage==60 and Projectiles[2].ProjectileSplashDamageMaxRadius==500)

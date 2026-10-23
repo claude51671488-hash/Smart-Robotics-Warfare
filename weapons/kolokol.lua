@@ -23,4 +23,10 @@ dlc2_Ammunition={
         Projectile="srw_kolokol_incendiary",
         MetalFireCost=25, EnergyFireCost=400,
     },
+    {
+        StringId="Weapon.srw_kolokol_capsule",
+        Sprite=path.."/ui/textures/weapons/matryoshka/capsule.png",
+        Projectile="srw_kolokol_capsule",
+        MetalFireCost=600,EnergyFireCost=6000,
+    },
 }

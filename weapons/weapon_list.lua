@@ -40,6 +40,12 @@ register({
     MetalCost=0, EnergyCost=0, MetalRepairCost=50, EnergyRepairCost=500,
     MaxUpAngle=90, SelectEffect="ui/hud/weapons/ui_weapons",
 })
+
+register({SaveName="srw_matryoshka_turret",FileName=path.."/weapons/matryoshka_turret.lua",
+    Icon="srw-kolokol-icon",Detail="srw-kolokol-icon",Enabled=false,ExcludeUnlockAll=true,
+    dlc2_BuildAnywhere=true,BuildOnGroundOnly=true,BuildTimeComplete=.04,ScrapPeriod=.04,
+    MetalCost=0,EnergyCost=0,MetalRepairCost=0,EnergyRepairCost=0,MaxUpAngle=90,
+    SelectEffect="ui/hud/weapons/ui_weapons"})
 register({
     SaveName="srw_aa_bot", FileName=path.."/weapons/aa_bot.lua",
     Icon="srw-kega-icon", Detail="srw-kega-icon",

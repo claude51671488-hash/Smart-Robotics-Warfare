@@ -1,0 +1,14 @@
+dofile("weapons/machinegun.lua")
+HitPoints=500
+RecessionBox=nil
+Projectile="srw_matryoshka_bullet"
+EnergyFireCost=0;MetalFireCost=0
+MinFireAngle=-180;MaxFireAngle=180
+MinFireClearance=0
+Recoil=0;KickbackMean=0;KickbackStdDev=0
+DeviceSplashDamage=0;StructureSplashDamage=0;IgnitePlatformOnDestruct=false
+RoundsEachBurst=1;ReloadTime=.04;ReloadTimeIncludesBurst=false
+MinFireSpeed=5000;MaxFireSpeed=5000.1
+FireStdDev=0;FireStdDevAuto=0;CanOverheat=false
+ShellEffect="";ReloadEffect=""
+dofile(path.."/scripts/matryoshka_weapon_art.lua")

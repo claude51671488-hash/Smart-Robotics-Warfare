@@ -1,7 +1,7 @@
 -- Forts loads this entry point for an enabled mod.
 dofile("scripts/forts.lua")
 
-SRW = { Version = "0.54.0-kolokol-bastion-art" }
+SRW = { Version = "0.54.3-kolokol-smoke-blast" }
 dofile(path .. "/scripts/config.lua")
 dofile(path .. "/scripts/robots/layout.lua")
 dofile(path .. "/scripts/combat/aiming.lua")
@@ -23,6 +23,7 @@ dofile(path .. "/scripts/robots/parcel.lua")
 dofile(path .. "/scripts/robots/repair.lua")
 dofile(path .. "/scripts/robots/engineer.lua")
 dofile(path .. "/scripts/robots/engineering_art.lua")
+dofile(path .. "/scripts/matryoshka.lua")
 dofile(path .. "/scripts/robots/shield.lua")
 dofile(path .. "/scripts/robots/aa.lua")
 dofile(path .. "/scripts/robots/heavy_aa.lua")
@@ -55,6 +56,7 @@ function Update(frame)
     SRW.BeginCombatSnapshot()
     SRW.UpdateRobots(0.04)
     SRW.UpdateMountedWeapons(0.04)
+    SRW.UpdateCapsules(0.04)
     SRW.EndCombatSnapshot()
     SRW.UpdateGuidance(0.04)
     SRW.ScanShields()
@@ -75,6 +77,7 @@ end
 function OnUpdate(delta)
     SRW.RefreshDynamitVisuals(delta)
     SRW.RefreshHornetVisuals(delta)
+    SRW.RefreshCapsuleVisuals(delta)
     SRW.RefreshUI()
     SRW.RefreshFactoryMap(delta)
     SRW.RefreshShieldUI(delta)
@@ -108,12 +111,14 @@ function SRW_Release(team, id)
 end
 
 function OnProjectileDestroyed(nodeId,teamId,saveName,structureIdHit,destroyType)
+    SRW.CapsuleImpact(nodeId,teamId,saveName,destroyType)
     SRW.EMPImpact(nodeId,teamId,saveName,destroyType)
     SRW.TerrainBlastVisual(nodeId,teamId,saveName,destroyType)
     if data.srw and data.srw.GuidedMissiles then data.srw.GuidedMissiles[nodeId]=nil end
 end
 
 function OnWeaponFired(teamId,saveName,weaponId,projectileNodeId,projectileNodeIdFrom)
+    SRW.TrackCapsule(teamId,projectileNodeId)
     SRW.EngineeringShot(weaponId)
     SRW.HornetShot(weaponId)
     SRW.GuidedLaunch(teamId,weaponId,projectileNodeId)

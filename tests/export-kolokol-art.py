@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'ui/textures/weapons/kolokol'
 CANVAS=(768,384)
-UNIT=.5
+UNIT=.65  # User requested a 30% larger mortar, including its mount and muzzle.
 
 def place(image,pivot,destination,scale=1,angle=0,size=CANVAS):
     c,s=math.cos(angle),math.sin(angle)

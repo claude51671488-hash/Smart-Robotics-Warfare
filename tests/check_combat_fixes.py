@@ -62,5 +62,7 @@ function SpawnCircle(p,r,c,t) assert(p.x==100 and r==280 and t==.35);circles=cir
 SRW.TerrainBlastVisual(1,101,"srw_cathedral_shell",3);assert(circles==1)
 SRW.TerrainBlastVisual(1,101,"srw_cathedral_shell",4)
 SRW.TerrainBlastVisual(1,101,"srw_emp_shell",3);assert(circles==1)
+SRW.TerrainBlastVisual(1,101,"srw_kolokol_he",3)
+SRW.TerrainBlastVisual(1,101,"srw_kolokol_incendiary",3);assert(circles==1)
 """)
 print('PASS: terrain blast radius visual only on artillery terrain impacts')

@@ -96,6 +96,15 @@ for name,p in ammo.items():
             assert p.ProjectileSprite==native.ProjectileSprite
             assert p.TrailEffect==native.TrailEffect
         continue
+    if name=='srw_kolokol_capsule':
+        assert p.Projectile.Root.Sprite=='mod/ui/textures/weapons/matryoshka/capsule.png'
+        assert p.Projectile.Root.Angle==0 and p.ProjectileDamage==0 and p.ProjectileSplashDamage==0
+        assert abs(p.Projectile.Root.Scale*256*.375-64)<.00001
+        continue
+    if name=='srw_matryoshka_bullet':
+        assert p.ProjectileDamage==45 and p.ProjectileSplashDamage==10 and p.WeaponDamageBonus==0
+        assert p.Projectile is None and p.ProjectileSprite==ammo['machinegun'].ProjectileSprite
+        continue
     if name in ('srw_kolokol_he','srw_kolokol_incendiary'):
         kind='he' if name=='srw_kolokol_he' else 'incendiary'
         assert p.Projectile.Root.Sprite=='mod/ui/textures/weapons/kolokol/'+kind+'.png'

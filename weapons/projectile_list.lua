@@ -52,12 +52,19 @@ clone("machinegun", "srw_aa_bullet", {
 })
 clone("mortar2", "srw_kolokol_he", {
     ProjectileDamage=135, ProjectileSplashDamage=270,
-    ProjectileSplashDamageMaxRadius=180, DisableShields=false,
+    ProjectileSplashDamageMaxRadius=270, DisableShields=false, -- previous radius x1.5 before common scaling
 })
 -- Preserve native incendiary effects and background ignition.
 clone("mortar", "srw_kolokol_incendiary", {
     ProjectileDamage=30, ProjectileSplashDamage=105,
-    ProjectileSplashDamageMaxRadius=150,
+    ProjectileSplashDamageMaxRadius=225, -- previous radius x1.5 before common scaling
+})
+-- Inert delivery shell. Terrain contact is handled once by the runtime script.
+clone("mortar2","srw_kolokol_capsule",{
+    ProjectileDamage=0,ProjectileSplashDamage=0,ProjectileSplashDamageMaxRadius=0,
+    DisableShields=false,ProjectileIncendiary=false,IgnitesBackgroundMaterials=false,
+    ExplodeOnTouch=true,DeflectedByTerrain=false,Gravity=981,ProjectileDrag=0,
+    MaxAge=60,Effects={},TrailEffect="",SRWRebalanced=true,
 })
 
 -- Script applies tier-specific EMP at confirmed contact. No native area EMP:
@@ -118,6 +125,8 @@ for _,p in ipairs(Projectiles) do
         p.Missile.MinTargetUpdateDistance=0
     end
 end
+
+
 
 clone("srw_aa_bullet", "srw_sentry_bullet", {ProjectileDamage=25, AntiAirDamage=30})
 clone("machinegun", "srw_hound_machinegun_bullet", {
@@ -370,5 +379,44 @@ for _,spec in ipairs({{"cannon","srw_bunker_shell",85},{"machinegun","srw_bunker
                 Angle=-90,Scale=spec[3]/(586*.375)}}
         end
         if index then Projectiles[index]=p else table.insert(Projectiles,p) end
+    end
+end
+
+-- Independent Matryoshka render and damage overrides, after all robot scaling.
+-- Vanilla Moonshot cannon20mm: direct 90, splash 20 (weapon_pack definition).
+for _,p in ipairs(Projectiles) do
+    if p.SaveName=="srw_kolokol_capsule" then
+        p.ProjectileSprite=nil;p.DrawBlurredProjectile=false
+        p.Projectile={Root={Name="Root",Sprite=path.."/ui/textures/weapons/matryoshka/capsule.png",
+            Angle=0,Scale=64/(256*.375)}}
+    end
+end
+local nativeMG,index
+for i,p in ipairs(Projectiles) do
+    if p.SaveName=="machinegun" then nativeMG=p end
+    if p.SaveName=="srw_matryoshka_bullet" then index=i end
+end
+if nativeMG then
+    local p=copy(nativeMG)
+    p.SaveName="srw_matryoshka_bullet";p.SRWRebalanced=true
+    p.ProjectileDamage=45;p.WeaponDamageBonus=0
+    p.ProjectileSplashDamage=10;p.ProjectileSplashDamageMaxRadius=100
+    p.DamageMultiplier={};p.Gravity=981;p.ProjectileDrag=0
+    p.Projectile=nil;p.ProjectileSprite=nativeMG.ProjectileSprite
+    if index then Projectiles[index]=p else table.insert(Projectiles,p) end
+end
+
+-- Author-requested smoky reactor-sized burst for Kolokol HE and incendiary.
+-- Rebind copied impact entries without changing native incendiary gameplay,
+-- deflection rules, damage, cost, or any other ammunition's resources.
+for _,p in ipairs(Projectiles) do
+    if p.SaveName=="srw_kolokol_he" or p.SaveName=="srw_kolokol_incendiary" then
+        p.Effects=p.Effects or {};p.Effects.Impact=p.Effects.Impact or {}
+        p.Effects.Impact.default=p.Effects.Impact.default or ""
+        for material,entry in pairs(p.Effects.Impact) do
+            local effect=path.."/effects/kolokol_mushroom.lua"
+            if type(entry)=="table" then entry.Effect=effect
+            else p.Effects.Impact[material]=effect end
+        end
     end
 end

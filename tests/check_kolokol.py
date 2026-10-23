@@ -19,7 +19,7 @@ for file in ('weapons/weapon_list.lua', 'weapons/projectile_list.lua'):
     lua.execute(source)
     lua.execute(source)
 lua.execute('''
-assert(#Weapons==66 and #Projectiles==20)
+assert(#Weapons==67 and #Projectiles==21)
 assert(Weapons[2].SaveName=="srw_kolokol" and Weapons[2].Enabled)
 assert(Weapons[2].Prerequisite=="workshop")
 assert(#Sprites==2 and Sprites[1].Name=="existing" and Sprites[2].Name=="srw-kolokol-icon")
@@ -31,7 +31,9 @@ assert(he.SaveName=="srw_kolokol_he" and he.ProjectileSplashDamage==810 and he.P
 assert(fire.ProjectileDamage==90 and fire.ProjectileSplashDamage==315)
 assert(not he.DisableShields and Projectiles[2].DisableShields)
 assert(fire.ProjectileIncendiary and fire.IgnitesBackgroundMaterials)
-assert(fire.Effects.Impact.bracing=="fire")
+assert(fire.Effects.Impact.bracing==path.."/effects/kolokol_mushroom.lua")
+assert(he.ProjectileSplashDamageMaxRadius==450*1.5)
+assert(fire.ProjectileSplashDamageMaxRadius==375*1.5)
 he.Effects.Impact.default="changed"
 assert(Projectiles[2].Effects.Impact.default=="he")
 function dofile(name)
@@ -45,9 +47,9 @@ lua.execute((root / 'weapons/kolokol.lua').read_text(encoding='utf-8'))
 lua.execute('''
 assert(#Sprites==2 and Root.Sprite=="srw-kolokol-base")
 assert(MaxFireSpeed==9000)
-assert(#dlc2_Ammunition==2 and Projectile==dlc2_Ammunition[1].Projectile)
+assert(#dlc2_Ammunition==3 and Projectile==dlc2_Ammunition[1].Projectile)
 for _,ammo in ipairs(dlc2_Ammunition) do
- assert(ammo.Devices==nil and ammo.Sprite:find('/ui/textures/weapons/kolokol/'))
+ assert(ammo.Devices==nil and ammo.Sprite:find('/ui/textures/weapons/'))
  local found=false
  for _,p in ipairs(Projectiles) do if p.SaveName==ammo.Projectile then found=true end end
  assert(found, "Unregistered ammunition")
