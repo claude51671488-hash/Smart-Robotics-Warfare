@@ -110,15 +110,16 @@
     "readme": "turret-pods/README.md",
     "selected_direction": "02_telescope",
     "requested_revision": "02_telescope_v2",
-    "revision_status": "art brief only; no revised image",
+    "revision_status": "generated concept and animation proposal",
     "brief": "turret-pods/MATRYOSHKA_V2_BRIEF.md",
     "flight_animation": {
-      "file": "turret-pods/flight-animation/matryoshka_flight_deploy.gif",
-      "readme": "turret-pods/flight-animation/README.md",
-      "source_concept": "02_telescope",
+      "file": "turret-pods/flight-animation-v2/matryoshka_flight_deploy.gif",
+      "readme": "turret-pods/flight-animation-v2/README.md",
+      "source_concept": "02_telescope_v2",
       "frames": 140,
       "duration_ms": 7000
-    }
+    },
+    "latest_revision": "02_telescope_v2"
   },
   "supporting_animation_assets": [
     {
