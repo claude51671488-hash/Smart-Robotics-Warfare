@@ -14,13 +14,16 @@ local function modes(kind)
     local states={}
     for _,side in ipairs({"right","left"}) do
         local suffix=side=="right" and "Right" or "Left"
-        local gun=kind and still(kind..(side=="left" and "_left" or ""))
-        for _,mode in ipairs({"cruise","boost","climb","dive"}) do
-            local name=mode:sub(1,1):upper()..mode:sub(2)..suffix
-            states[name]=gun or {Frames=sequence(mode,side),NextState=name}
-            states[name.."Launch"]=gun or {Frames=sequence(mode.."_launch",side),NextState=name}
+        for _,gunSide in ipairs({side,side=="left" and "right" or "left"}) do
+            local tail=gunSide==side and "" or (gunSide=="left" and "GunLeft" or "GunRight")
+            local gun=kind and still(kind..(gunSide=="left" and "_left" or ""))
+            for _,mode in ipairs({"cruise","boost","climb","dive"}) do
+                local name=mode:sub(1,1):upper()..mode:sub(2)..suffix
+                states[name..tail]=gun or {Frames=sequence(mode,side),NextState=name..tail}
+                states[name.."Launch"..tail]=gun or {Frames=sequence(mode.."_launch",side),NextState=name..tail}
+            end
+            states["Idle"..suffix..tail]=gun or still("idle_"..side)
         end
-        states["Idle"..suffix]=gun or still("idle_"..side)
     end
     states.Normal=states.CruiseRight;states.Idle=states.Normal
     states.Reload=states.Normal;states.ReloadEnd=states.Normal

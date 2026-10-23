@@ -26,6 +26,18 @@ function SRW.RefreshHornetVisuals(delta)
             if DeviceDisabled(id) then mode="Idle";cache.LaunchAge=1 end
             local state=mode..(direction<0 and "Left" or "Right")
             if cache.LaunchAge<.28 then state=state.."Launch" end
+            -- Hull pitch and gun traverse are independent. Select the gun art
+            -- from the actual barrel's direction in the hull frame, so rotating
+            -- the aircraft cannot invert its independently aimed lower turret.
+            local gunSide=direction
+            if GetWeaponBarrelPosition and GetWeaponHardpointPosition then
+                local head=GetWeaponBarrelPosition(id)
+                local muzzle=GetWeaponHardpointPosition(id)
+                local pitch=bot.FlightPitch or 0
+                local dx=(muzzle.x-head.x)*math.cos(pitch)+(muzzle.y-head.y)*math.sin(pitch)
+                if math.abs(dx)>.01 then gunSide=dx<0 and -1 or 1 end
+            end
+            if gunSide~=direction then state=state..(gunSide<0 and "GunLeft" or "GunRight") end
             if cache.State~=state or launch then SetDeviceSpriteState(id,state);cache.State=state end
             shown[id]=cache
         end

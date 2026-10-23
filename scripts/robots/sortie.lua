@@ -10,6 +10,26 @@ local function angle(x,y)
 end
 local function difference(a,b) return (a-b+math.pi)%(2*math.pi)-math.pi end
 local function clamp(v,n) return math.max(-n,math.min(n,v)) end
+-- One rigid flight frame for hull and hatch positions. Keep the selected team
+-- silhouette through the whole loop; swapping mirrors at vertical flight would
+-- snap the upper/lower surfaces and move the gun to the other side of the hull.
+function SRW.HornetRigPoint(bot,p,x,y)
+    local pitch=bot.FlightPitch or 0
+    local c,s=math.cos(pitch),math.sin(pitch)
+    x=x*bot.Direction
+    return Vec3(p.x+x*c-y*s,p.y+x*s+y*c,0)
+end
+local function orientHull(id,bot)
+    if bot.Kind~="srw_hornet_bot" then return end
+    local pitch=bot.SortieHeading-(bot.Direction<0 and math.pi or 0)
+    -- Native probe: angle 0 -> forward (0,1), pi/2 -> (1,0), for both teams.
+    -- SetDeviceAngle takes radians, unlike floating-device creation (degrees).
+    if not bot.FlightPitch or math.abs(pitch-bot.FlightPitch)>.000001 then
+        SetDeviceAngle(id,math.pi/2-pitch)
+    end
+    bot.FlightPitch=pitch
+    bot.ArtFacing=bot.Direction
+end
 local function phase(bot,name)
     bot.SortiePhase=name;bot.SortieTime=0
     bot.AirPhase=name=="attack" and "attack" or "egress"
@@ -214,8 +234,8 @@ function SRW.UpdateSortieFlight(id,bot,dt)
     end
     dlc2_SetDevicePosition(id,q)
     bot.AirVelocity={x=(q.x-p.x)/dt,y=(q.y-p.y)/dt}
-    if math.abs(bot.AirVelocity.x)>speed*.1 then bot.ArtFacing=bot.AirVelocity.x<0 and -1 or 1 end
-    bot.AirHeading=bot.ArtFacing or bot.Direction
+    orientHull(id,bot)
+    bot.AirHeading=bot.AirVelocity.x<0 and -1 or 1
     -- Guns only fire on an aligned pass. Root/mount cooldowns keep ticking while
     -- orbiting; no position lock is introduced for these individually fired rounds.
     local aligned=false

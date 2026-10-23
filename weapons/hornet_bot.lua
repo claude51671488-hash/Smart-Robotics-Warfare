@@ -1,4 +1,4 @@
--- Concept 20: light autocannon. Temporary native gun model, upright platform.
+-- Concept 20: approved Hornet hull pitches with flight; gun traverses separately.
 dofile(path.."/weapons/aa_bot.lua")
 Scale=.3
 HitPoints=800

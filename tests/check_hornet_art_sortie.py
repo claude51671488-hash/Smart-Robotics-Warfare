@@ -7,6 +7,19 @@ for file in ('robots/sortie.lua','robots/hornet_art.lua'):
  lua.execute((r/'scripts'/file).read_text())
 lua.execute('''
 local shots={};local sprites={}
+function SetDeviceAngle(id,a)
+ assert(devices[id].kind=='srw_hornet_bot','rotated an independent silo or ground unit')
+ devices[id].angle=a
+end
+function GetDeviceAngle(id) return devices[id].angle or math.pi/2 end
+function GetWeaponBarrelPosition(id) return devices[id].pos end
+function GetWeaponHardpointPosition(id)
+ local d=devices[id];local p=d.pos
+ if d.kind~='srw_hornet_bot' then return p end
+ local bot=data.srw.Robots[id]
+ local a=(d.team%100==1 and 0 or math.pi)+(bot and bot.FlightPitch or 0)
+ return Vec3(p.x+88*math.cos(a),p.y+88*math.sin(a),0)
+end
 function SetDeviceSpriteState(id,state) sprites[id]=state end
 function GetDeviceCountSide(side) return side==2 and 1 or 0 end
 function GetDeviceIdSide() return 800 end

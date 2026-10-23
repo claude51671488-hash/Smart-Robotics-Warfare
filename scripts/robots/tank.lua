@@ -73,7 +73,13 @@ function SRW.UpdateMountedWeapons(dt)
         else
             local p=GetDevicePosition(part.Root)
             if root.Kind=="srw_hornet_bot" then part.Direction=root.ArtFacing or root.Direction end
-            dlc2_SetDevicePosition(id,Vec3(p.x+(part.OffsetX or 0)*part.Direction,p.y+(part.OffsetY or -50),0))
+            local mount=Vec3(p.x+(part.OffsetX or 0)*part.Direction,p.y+(part.OffsetY or -50),0)
+            if root.Kind=="srw_hornet_bot" and SRW.HornetRigPoint then
+                mount=SRW.HornetRigPoint(root,p,part.OffsetX or 0,part.OffsetY or -50)
+            end
+            -- The invisible missile silo keeps its native vertical launch arc;
+            -- its world hardpoint follows the rotating hatch on the rigid hull.
+            dlc2_SetDevicePosition(id,mount)
             part.EMPRemaining=math.max(0,(part.EMPRemaining or 0)-dt,root.EMPRemaining or 0)
             -- A burst already in flight must expire even during egress or root EMP.
             -- Otherwise aircraft can remain frozen forever waiting on this mount.
