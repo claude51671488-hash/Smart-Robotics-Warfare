@@ -1,0 +1,60 @@
+{
+  "created_date": "2026-10-23",
+  "title": "Kolokol siege mortar concepts",
+  "image_count": 5,
+  "generator": "OpenAI image generation",
+  "status": "static concept art; not game-ready textures or animation",
+  "original_weapon_source_available": false,
+  "images": [
+    {
+      "id": "01_classic",
+      "file": "images/01_classic.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 1747927,
+      "sha256": "0c26c30551096967aca646e271140a580c49340fa252a3a0c29671b91084c58d",
+      "git_blob_sha": "ab77c0d01495438f21f5655a383dfa7a54cd589a"
+    },
+    {
+      "id": "02_bastion",
+      "file": "images/02_bastion.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 1875675,
+      "sha256": "61526e1cac299a27175616dbbf1684d3e0a75d5501e53cdc869f0bcb372a6ce1",
+      "git_blob_sha": "b0e4529b52de577ffe7959a13376adedd0772a41"
+    },
+    {
+      "id": "03_carousel",
+      "file": "images/03_carousel.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 1924931,
+      "sha256": "da3288d3f633a98e7e23e698155a55e9b3d4882c909ccf77f14122a23d5f9b5a",
+      "git_blob_sha": "598f17c559894b75ace56074ad40b4481d96a1f2"
+    },
+    {
+      "id": "04_foundry",
+      "file": "images/04_foundry.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 1852854,
+      "sha256": "c685b93fdd6aa1d0a5e8858f9dac2bddd8434db564b5327de2608d50c74cc690",
+      "git_blob_sha": "ce29d12ba9176c982a2ddf0eebc1f691a178521f"
+    },
+    {
+      "id": "05_sentinel",
+      "file": "images/05_sentinel.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 1905287,
+      "sha256": "12f9e7245d4912c04ccb75a5f1291030eeffbaac70451bc5ad04a38f4ca78642",
+      "git_blob_sha": "d8f026f0c3c520736a0dd6134e1590b0f8fd9db6"
+    }
+  ]
+}
