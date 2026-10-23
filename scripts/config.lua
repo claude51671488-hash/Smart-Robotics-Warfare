@@ -307,4 +307,4 @@ SRW.Config.Robots.srw_bunker_machinegun.Precise=true
 -- Approved Matryoshka: stationary gun, no lifetime timer. Native MG cadence.
 SRW.Config.Matryoshka={Health=500,MetalFireCost=600,EnergyFireCost=6000,
     DeploySeconds=2.4,Range=5000*5000/981,BulletSpeed=5000,
-    ReloadSeconds=1.5,BurstCount=7,BurstPeriod=.15,MuzzleAim=true}
+    ReloadSeconds=1.5,BurstCount=7,BurstPeriod=.15,MuzzleAim=true,CheckFireClearance=true}

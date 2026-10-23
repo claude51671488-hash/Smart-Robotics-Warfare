@@ -1,13 +1,20 @@
 -- A terrain-only delivery lifecycle. No disappearance/mid-air spawn heuristic.
-function SRW.TrackCapsule(team,node)
+-- One short log per lifecycle transition; no per-frame/per-bullet trace.
+local function trace(event,details)
+    Log("[SRW][Matryoshka] event="..event.." "..details)
+end
+function SRW.TrackCapsule(team,node,weapon)
     if NodeExists(node) and GetNodeProjectileSaveName(node)=="srw_kolokol_capsule" then
         data.srw.CapsuleFlights[node]={Team=team,Age=0}
+        trace("launched","node="..node.." team="..team.." weapon="..tostring(weapon))
     end
 end
 function SRW.CapsuleImpact(node,team,name,cause)
     if name~="srw_kolokol_capsule" then return end
     local flight=data.srw.CapsuleFlights[node]
     if flight and flight.Consumed then return end
+    trace("impact","node="..node.." team="..tostring(team).." cause="..tostring(cause)
+        .." terrain="..tostring(cause==DESTROYTYPE_HITTERRAIN).." tracked="..tostring(flight~=nil))
     -- The native destruction event identifies the projectile and its final
     -- owner. Its delivery must not depend on receiving an earlier fired event
     -- (for example after restoring an in-flight shell from a save).
@@ -16,19 +23,20 @@ function SRW.CapsuleImpact(node,team,name,cause)
     local p=NodePosition(node)
     local ground=SRW.GroundAt(p.x,p.y,300)
     if not ground then
-        Log("[SRW] Capsule terrain impact has no placement surface: node="..node)
+        trace("placement_failed","node="..node.." reason=no_surface")
         return
     end
     EnableWeapon("srw_matryoshka_turret",true,team%100)
     local id=dlc2_CreateFloatingDevice(team,"srw_matryoshka_turret",ground,90)
     EnableWeapon("srw_matryoshka_turret",false,team%100)
     if not id or id<0 then
-        Log("[SRW] Capsule turret creation failed: node="..node.." result="..tostring(id))
+        trace("placement_failed","node="..node.." reason=create_failed result="..tostring(id))
         return
     end
     data.srw.CapsuleTurrets[id]={Team=team,Direction=team%100==1 and 1 or -1,
         Kind="srw_matryoshka_turret",Mounted=true,DeployAge=0,FireWait=0}
     SetWeaponReloadTime(id,0)
+    trace("placed","node="..node.." turret="..id.." team="..team.." x="..ground.x.." y="..ground.y)
 end
 
 local function updateGun(id,bot,cfg,dt)
@@ -63,12 +71,22 @@ local function updateGun(id,bot,cfg,dt)
             if bot.FireWait<=0 then
                 aim,spread=SRW.AimSolution(id,bot,cfg,target,dt,true)
                 local result=SRW.FireRobotWeapon(id,cfg,aim,spread)
+                local previous=bot.LastFireResult
                 bot.LastFireResult=result
                 if result==(FIRE_SUCCESS or 0) then
+                    if not bot.FirstFireLogged then
+                        trace("first_fire","turret="..id.." team="..bot.Team.." target="..target.Id)
+                        bot.FirstFireLogged=true
+                    end
                     bot.BurstRemaining=(bot.BurstRemaining or cfg.BurstCount)-1
                     if bot.BurstRemaining>0 then bot.FireWait=cfg.BurstPeriod
                     else bot.BurstRemaining=nil;bot.FireWait=cfg.ReloadSeconds end
-                else bot.FireWait=.2 end
+                else
+                    if previous~=result then
+                        trace("fire_failed","turret="..id.." target="..target.Id.." result="..tostring(result))
+                    end
+                    bot.FireWait=.2
+                end
             end
             return
         end
@@ -85,20 +103,30 @@ function SRW.UpdateCapsules(dt)
         -- in the same tick. Keep the bounded record until that callback (or
         -- the projectile's maximum lifetime plus two seconds), without ever
         -- treating disappearance itself as a landing.
-        if flight.Age>(flight.Consumed and 2 or 62) then data.srw.CapsuleFlights[node]=nil end
+        if flight.Age>(flight.Consumed and 2 or 62) then
+            if not flight.Consumed then
+                trace("flight_expired","node="..node.." team="..flight.Team.." age="..flight.Age)
+            end
+            data.srw.CapsuleFlights[node]=nil
+        end
     end
     for _,id in ipairs(SRW.SortedIds(data.srw.CapsuleTurrets)) do
         local bot=data.srw.CapsuleTurrets[id]
-        if not DeviceExists(id) then data.srw.CapsuleTurrets[id]=nil
+        if not DeviceExists(id) then
+            trace("removed","turret="..id.." team="..bot.Team)
+            data.srw.CapsuleTurrets[id]=nil
         else
             -- A captured turret follows its actual owner. No stale allied fire.
-            bot.Team=GetDeviceTeamIdActual(id);bot.Direction=bot.Team%100==1 and 1 or -1
+            local team=GetDeviceTeamIdActual(id)
+            if team~=bot.Team then trace("captured","turret="..id.." from="..bot.Team.." team="..team) end
+            bot.Team=team;bot.Direction=bot.Team%100==1 and 1 or -1
             if not DeviceDisabled(id) and IsDeviceFullyBuilt(id) then
                 bot.DeployAge=math.min(cfg.DeploySeconds,bot.DeployAge+dt)
                 if bot.DeployAge>=cfg.DeploySeconds then
                     if not bot.Deployed then
                         bot.Deployed=true
                         SetWeaponReloadTime(id,GetWeaponReloadPeriodById(id))
+                        trace("ready","turret="..id.." team="..bot.Team.." age="..bot.DeployAge)
                     end
                     updateGun(id,bot,cfg,dt)
                 end

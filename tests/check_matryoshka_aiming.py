@@ -9,6 +9,8 @@ from lupa import LuaRuntime
 lua=LuaRuntime()
 lua.execute('''
 SRW={};data={};devices={};FIREFLAG_DIRECTAIM=32;FIRE_SUCCESS=0
+FIREFLAG_TEST=1;FIREFLAG_IGNORERELOADING=2
+function Log() end
 function Vec3(x,y,z) return {x=x,y=y,z=z or 0} end
 function DeviceExists(id) return devices[id]~=nil end
 function GetDeviceTeamIdActual(id) return devices[id].Team end
@@ -25,7 +27,12 @@ function SRW.SortedIds(t)
  local ids={};for id in pairs(t) do ids[#ids+1]=id end;table.sort(ids);return ids
 end
 function FireWeaponWithPower(id,p,spread,testSpread,flags,power)
- assert(testSpread==-1 and flags==32 and power==1)
+ assert(testSpread==-1 and power==1)
+ if flags==35 then
+  clearanceTests=(clearanceTests or 0)+1
+  return nativeBlocked and nativeBlocked(p) and 11 or FIRE_SUCCESS
+ end
+ assert(flags==32)
  last=p;shots=shots+1;return FIRE_SUCCESS
 end
 ''')
@@ -104,5 +111,22 @@ for _,direction in ipairs({1,-1}) do
  entries={};SRW.UpdateCapsules(.04)
  assert(bot.AimTrack==nil,'lost target retained motion history')
 end
+-- A clear terrain arc is not sufficient when Forts itself refuses the shot.
+-- Native clearance tests must ignore reload and must never fire real bullets.
+entries={{Id=1,Position=Vec3(1000,-90)},{Id=9,Position=Vec3(-1400,-90)}}
+blocked={};devices[100].Team=101;devices[100].Muzzle=Vec3(350,-90)
+local bot={Team=101,Direction=1,DeployAge=cfg.DeploySeconds,Deployed=true,FireWait=0}
+data.srw.CapsuleTurrets={[100]=bot};shots=0;clearanceTests=0
+nativeBlocked=function(p) return p.x>devices[100].Head.x end
+SRW.UpdateCapsules(.04)
+assert(bot.Target==9 and shots==1 and clearanceTests==2,
+ 'engine-rejected weapon hid the clear rear target')
+nativeBlocked=function() return true end;bot.FireWait=0
+SRW.UpdateCapsules(.04)
+assert(bot.Target==nil and shots==1,'failed clearance fired a real bullet')
+nativeBlocked=nil;bot.FireWait=.12;local tests=clearanceTests
+SRW.UpdateCapsules(.04)
+assert(bot.Target==1 and shots==1 and clearanceTests==tests+1 and bot.FireWait>0,
+ 'test fire spent a shot or bypassed the scripted cooldown')
 ''')
-print('PASS: Matryoshka muzzle/head rebasing, close/elevated rear shots, ninth-target acquisition, blocked-weapon fallback, reacquisition, moving-target lead and tracking cleanup')
+print('PASS: Matryoshka muzzle/head rebasing, close/elevated rear shots, ninth-target acquisition, blocked-weapon fallback, moving-target lead, native clearance and reload-safe test shots')

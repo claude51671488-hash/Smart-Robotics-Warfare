@@ -65,9 +65,9 @@ function SRW.CanAimRobotWeapon(id,cfg,target)
     if cfg.Artillery or cfg.Guided then return AimWeapon(id,SRW.LaunchAim(id,cfg,target)) end
     local barrel=SRW.DirectBarrelTarget(id,cfg,target)
     if not barrel or not SRW.BarrelInSector(id,cfg,barrel) then return false end
-    if cfg.LimitedElevation and FIREFLAG_TEST and FIREFLAG_IGNORERELOADING then
-        -- Do not lock onto the first enemy if its firing line is obstructed by
-        -- the bunker itself. Test without spending ammo or changing reload.
+    if (cfg.LimitedElevation or cfg.CheckFireClearance) and FIREFLAG_TEST and FIREFLAG_IGNORERELOADING then
+        -- Native clearance can reject a shot even when terrain is clear.
+        -- Test without spending ammo or changing reload, before locking a target.
         local flags=FIREFLAG_DIRECTAIM+FIREFLAG_TEST+FIREFLAG_IGNORERELOADING
         return FireWeaponWithPower(id,barrel,0,-1,flags,1)==FIRE_SUCCESS
     end

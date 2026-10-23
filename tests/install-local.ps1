@@ -32,7 +32,7 @@ if (-not $Apply) {
     return
 }
 if (Get-Process Forts -ErrorAction SilentlyContinue) { throw 'Forts is running; installation stopped before writing' }
-$backup = Join-Path $workspaceRoot ('srw-backups\0.54.5-matryoshka-tracking-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))
+$backup = Join-Path $workspaceRoot ('srw-backups\0.54.6-matryoshka-delivery-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))
 $metadata = @{}
 foreach ($target in $targets) {
     foreach ($name in @('publishedfileid.lua','itemversion.lua')) {
@@ -57,6 +57,6 @@ foreach ($entry in $plan) {
 foreach ($name in $metadata.Keys) {
     if ((Get-FileHash -LiteralPath $name).Hash -ne $metadata[$name]) { throw 'Workshop metadata changed unexpectedly' }
 }
-$manifest=[pscustomobject]@{Version='0.54.5-matryoshka-tracking';Targets=$targets;FilesPerCopy=$files.Count;Changed=@($plan | Where-Object Changed).Count;MetadataPreserved=$true;Files=$plan}
+$manifest=[pscustomobject]@{Version='0.54.6-matryoshka-delivery';Targets=$targets;FilesPerCopy=$files.Count;Changed=@($plan | Where-Object Changed).Count;MetadataPreserved=$true;Files=$plan}
 $manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $backup 'install-manifest.json') -Encoding utf8
 [pscustomobject]@{Backup=$backup;FilesPerCopy=$files.Count;Changed=$manifest.Changed;Copies=$targets.Count;MetadataPreserved=$true;AllHashesVerified=$true} | ConvertTo-Json
