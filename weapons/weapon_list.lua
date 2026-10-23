@@ -1,4 +1,12 @@
 -- Append srw_ weapons to the existing Weapons table here.
+Sprites=Sprites or {}
+local hasKolokolIcon=false
+for _,sprite in ipairs(Sprites) do if sprite.Name=="srw-kolokol-icon" then hasKolokolIcon=true end end
+if not hasKolokolIcon then
+    local state={Frames={{texture=path.."/ui/textures/weapons/kolokol/icon.png"},mipmap=true}}
+    table.insert(Sprites,{Name="srw-kolokol-icon",States={Normal=state,Idle=state,
+        Rollover=state,Pressed=state,Disabled=state}})
+end
 local function register(definition)
     for _, weapon in ipairs(Weapons) do
         if weapon.SaveName == definition.SaveName then return end
@@ -16,7 +24,7 @@ register({
 
 register({
     SaveName="srw_kolokol", FileName=path.."/weapons/kolokol.lua",
-    Icon="srw-kega-icon", Detail="srw-kega-icon", GroupButton="srw-kega-icon",
+    Icon="srw-kolokol-icon", Detail="srw-kolokol-icon", GroupButton="srw-kolokol-icon",
     Enabled=true, Prerequisite="workshop",
     BuildTimeComplete=20, ScrapPeriod=10,
     MetalCost=350, EnergyCost=2200, MetalRepairCost=70, EnergyRepairCost=1000,

@@ -313,6 +313,14 @@ for _,p in ipairs(Projectiles) do
             -- Visible length: missile2 alpha bounds 297 px at scale 1;
             -- KS-30 HE130 alpha bounds 486 px at scale .5. Preserve author's aspect.
             Scale=rocket and (297/636) or (243/245)}}
+        -- Author selected distinct Kolokol HE-B / incendiary-A concepts.
+        -- Render-only assignment; keep each round's physics and impact tables.
+        local kolokol=p.SaveName=="srw_kolokol_he" and "he"
+            or (p.SaveName=="srw_kolokol_incendiary" and "incendiary")
+        if kolokol then
+            p.Projectile.Root.Sprite=path.."/ui/textures/weapons/kolokol/"..kolokol..".png"
+            p.Projectile.Root.Scale=48/(256*.375)
+        end
     end
 end
 

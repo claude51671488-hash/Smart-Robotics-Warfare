@@ -6,7 +6,7 @@ sys.path.insert(0, str(root.parent / '.srw-tools'))
 from lupa import LuaRuntime
 lua = LuaRuntime()
 lua.execute('''
-path="mods/srw"; Weapons={}; StandardMaxUpAngle=45
+path="mods/srw"; Weapons={}; StandardMaxUpAngle=45;Sprites={{Name="existing"}}
 Projectiles={
  {SaveName="cannon",ProjectileDamage=999},
  {SaveName="mortar2",ProjectileDamage=60,DisableShields=true,Effects={Impact={default="he"}}},
@@ -22,6 +22,10 @@ lua.execute('''
 assert(#Weapons==66 and #Projectiles==20)
 assert(Weapons[2].SaveName=="srw_kolokol" and Weapons[2].Enabled)
 assert(Weapons[2].Prerequisite=="workshop")
+assert(#Sprites==2 and Sprites[1].Name=="existing" and Sprites[2].Name=="srw-kolokol-icon")
+for _,state in ipairs({"Normal","Idle","Rollover","Pressed","Disabled"}) do
+ assert(Sprites[2].States[state].Frames[1].texture==path.."/ui/textures/weapons/kolokol/icon.png")
+end
 local he,fire=Projectiles[6],Projectiles[7]
 assert(he.SaveName=="srw_kolokol_he" and he.ProjectileSplashDamage==810 and he.ProjectileDamage==405)
 assert(fire.ProjectileDamage==90 and fire.ProjectileSplashDamage==315)
@@ -31,18 +35,19 @@ assert(fire.Effects.Impact.bracing=="fire")
 he.Effects.Impact.default="changed"
 assert(Projectiles[2].Effects.Impact.default=="he")
 function dofile(name)
- assert(name=="weapons/mortar.lua")
+ if name~="weapons/mortar.lua" then return loadAsset(name) end
  Root={Sprite="mortar-base"}; Sprites={{Name="mortar-base"}}
  MinFireAngle=45; MaxFireAngle=85
 end
 ''')
+lua.globals().loadAsset=lambda name: lua.execute((root/name.replace('mods/srw/','')).read_text(encoding='utf-8'))
 lua.execute((root / 'weapons/kolokol.lua').read_text(encoding='utf-8'))
 lua.execute('''
-assert(#Sprites==0 and Root.Sprite=="mortar-base")
+assert(#Sprites==2 and Root.Sprite=="srw-kolokol-base")
 assert(MaxFireSpeed==9000)
 assert(#dlc2_Ammunition==2 and Projectile==dlc2_Ammunition[1].Projectile)
 for _,ammo in ipairs(dlc2_Ammunition) do
- assert(ammo.Devices==nil and ammo.Sprite==path.."/ui/textures/HUD/kega.png")
+ assert(ammo.Devices==nil and ammo.Sprite:find('/ui/textures/weapons/kolokol/'))
  local found=false
  for _,p in ipairs(Projectiles) do if p.SaveName==ammo.Projectile then found=true end end
  assert(found, "Unregistered ammunition")

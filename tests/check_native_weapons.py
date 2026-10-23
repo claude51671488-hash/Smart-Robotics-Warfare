@@ -96,6 +96,12 @@ for name,p in ammo.items():
             assert p.ProjectileSprite==native.ProjectileSprite
             assert p.TrailEffect==native.TrailEffect
         continue
+    if name in ('srw_kolokol_he','srw_kolokol_incendiary'):
+        kind='he' if name=='srw_kolokol_he' else 'incendiary'
+        assert p.Projectile.Root.Sprite=='mod/ui/textures/weapons/kolokol/'+kind+'.png'
+        assert p.Projectile.Root.Angle==-90 and abs(p.Projectile.Root.Scale*256*.375-48)<.00001
+        assert p.ProjectileSprite is None and p.Gravity==981
+        continue
     rocket=name in rockets or name=='srw_mlrs_rocket' or p.ProjectileType=='missile'
     expected='smart_missile' if rocket else 'artillery_shell'
     assert p.Projectile.Root.Sprite=='mod/ui/textures/projectiles/'+expected+'.png',name
