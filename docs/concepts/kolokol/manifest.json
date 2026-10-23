@@ -1,7 +1,7 @@
 {
   "created_date": "2026-10-23",
   "title": "Kolokol siege mortar concepts",
-  "image_count": 6,
+  "image_count": 7,
   "generator": "OpenAI image generation",
   "status": "static concept art; not game-ready textures or animation",
   "original_weapon_source_available": false,
@@ -67,10 +67,96 @@
       "git_blob_sha": "ed524c0fcf63b5b7608b196ba2032d08d0a31fd0",
       "derived_from": "02_bastion",
       "revision": 2
+    },
+    {
+      "path": "docs/concepts/kolokol/images/02_bastion_v3.png",
+      "bytes": 2012482,
+      "sha256": "0f8fc2391067a25bc86df0d4a471b2fa0d0706349bd42667cc5174c9d7501468",
+      "git_blob_sha": "d679031a746f791579bfa0c08e2f21dcdc597f63",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "id": "02_bastion_v3",
+      "file": "images/02_bastion_v3.png",
+      "derived_from": "02_bastion_v2",
+      "revision": 3
     }
   ],
   "original_concept_count": 5,
   "selected_direction": "02_bastion",
-  "latest_revision": "02_bastion_v2",
-  "updated_date": "2026-10-23"
+  "latest_revision": "02_bastion_v3",
+  "updated_date": "2026-10-23",
+  "animation": {
+    "path": "docs/concepts/kolokol/animation/bastion_v3_elevation_80deg.gif",
+    "bytes": 6364495,
+    "sha256": "0824e088fd5f1099c83b29d4c9473830819a547d59d0d247efedec37f6d34d8d",
+    "git_blob_sha": "7c5ba4356b5360dd84f5a1c0a6017651207db2ef",
+    "width": 1200,
+    "height": 1000,
+    "format": "GIF",
+    "frames": 84,
+    "duration_ms": 4200,
+    "static_base_mean_rgb_difference_max": 0.16,
+    "file": "animation/bastion_v3_elevation_80deg.gif",
+    "angle_min_deg": 10,
+    "angle_max_deg": 90,
+    "sweep_deg": 80,
+    "pivot_fixed": true,
+    "game_tested": false
+  },
+  "turret_pods": {
+    "concept_count": 5,
+    "manifest": "turret-pods/manifest.json",
+    "readme": "turret-pods/README.md"
+  },
+  "supporting_animation_assets": [
+    {
+      "path": "docs/concepts/kolokol/animation/elevation_keyframes.png",
+      "bytes": 828787,
+      "sha256": "348acb981f6ac3ecc73e89fcb868daaf0d70bb6adbfbb33abf0f81de683e408d",
+      "git_blob_sha": "b53213828650f5667620b2d245817cb0228d6b2c",
+      "width": 1800,
+      "height": 500,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/animation/render.mjs",
+      "bytes": 3535,
+      "sha256": "200ec0a7abec1be24e2c9d550f0a3f16f60c792ebac06f356cdc1927360744bc",
+      "git_blob_sha": "3b1c68074f477528466bf9d530dc1b2adcb7b5be"
+    },
+    {
+      "path": "docs/concepts/kolokol/animation/barrel.png",
+      "bytes": 981752,
+      "sha256": "fb9c627fd375832200d6cfd212270cbe5e1fdb1701d780980cc1ac6657e4977d",
+      "git_blob_sha": "ac5903808d796e748aa89d282b2fc013228a3c56",
+      "width": 1536,
+      "height": 500,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/animation/base.png",
+      "bytes": 1187839,
+      "sha256": "5fd713af0b39a7b0268f6dacafdf1ee65a18cde8cab2ade2248906bfc1c1653e",
+      "git_blob_sha": "a9929f3b365f30eebe197319171c9059ce71ec4b",
+      "width": 1536,
+      "height": 504,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/animation/motion.json",
+      "bytes": 698,
+      "sha256": "6f56dea9da4b54c60d0d21aa2bc2175b802ce94b3d2f9c270cb51a6bd25a22d4",
+      "git_blob_sha": "1f7defc26e7d8ea0dd1a47b988ad2dbe37bc35ab"
+    },
+    {
+      "path": "docs/concepts/kolokol/animation/layers.png",
+      "bytes": 2242683,
+      "sha256": "aed1b846c13fb1ba727aeb47a3ddfe465a9d2acad4ef073b60edcdbf78921a5b",
+      "git_blob_sha": "0aaf777aff651eaa36063f859fdcd42f6f3e6d80",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG"
+    }
+  ]
 }

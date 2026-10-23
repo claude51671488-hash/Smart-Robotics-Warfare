@@ -1,0 +1,73 @@
+{
+  "created_date": "2026-10-23",
+  "concept_count": 5,
+  "image_count": 5,
+  "states_per_image": [
+    "CAPSULE",
+    "UNFOLD",
+    "DEPLOYED"
+  ],
+  "status": "static art concepts, no game implementation",
+  "images": [
+    {
+      "path": "docs/concepts/kolokol/turret-pods/images/01_bud.png",
+      "bytes": 1938203,
+      "sha256": "56d7e1e91e4e0470ef1cdc777cd063cf69dc9bf033d8716c0aae5498e954d8b7",
+      "git_blob_sha": "e135e27af4d4ff69e36be5eb0d0ddc7e24ea5607",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "id": "01_bud",
+      "name": "Бутон",
+      "file": "images/01_bud.png"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/images/02_telescope.png",
+      "bytes": 2083979,
+      "sha256": "7141c99cf6a72ebc9d75432f338d825c414d763a8235707a89fd8ee67dd25a6f",
+      "git_blob_sha": "2068ebbfc596929ac3fc476f1f42af61b5269614",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "id": "02_telescope",
+      "name": "Матрёшка",
+      "file": "images/02_telescope.png"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/images/03_spider.png",
+      "bytes": 2033207,
+      "sha256": "e3056c9dfc8caeaa358d85ad8ce82225261e54edc389281dc5df5028b915afd5",
+      "git_blob_sha": "b56fcdf473bac1c81018c90176d6204acd6db39f",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "id": "03_spider",
+      "name": "Паук",
+      "file": "images/03_spider.png"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/images/04_tripod.png",
+      "bytes": 1951408,
+      "sha256": "57c9fca72d3d338f7b39f062df52f42c6284cfaeffdb40a1b5d9d40571a16734",
+      "git_blob_sha": "8d2e33a3db6def10f97c4725f373757863dc229e",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "id": "04_tripod",
+      "name": "Тренога",
+      "file": "images/04_tripod.png"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/images/05_bunker.png",
+      "bytes": 2001377,
+      "sha256": "eea8f5a07fba94e28e104f1ed665a07da48efa880b6ad34184712a2246aa7428",
+      "git_blob_sha": "89f3bf38480381fc365882622927aca6c71baee9",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "id": "05_bunker",
+      "name": "Панцирь",
+      "file": "images/05_bunker.png"
+    }
+  ]
+}

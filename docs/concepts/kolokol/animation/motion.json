@@ -1,0 +1,48 @@
+{
+  "canvas": [
+    1200,
+    1000
+  ],
+  "sheet": [
+    1536,
+    1024
+  ],
+  "barrelCrop": [
+    1536,
+    500,
+    0,
+    0
+  ],
+  "baseCrop": [
+    1536,
+    504,
+    0,
+    520
+  ],
+  "barrelPivot": [
+    300,
+    305
+  ],
+  "basePivotInSheet": [
+    677,
+    700
+  ],
+  "baseScale": 0.55,
+  "baseOffset": [
+    80,
+    640
+  ],
+  "pivot": [
+    452.35,
+    739
+  ],
+  "angleMin": 10,
+  "angleMax": 90,
+  "sweepDegrees": 80,
+  "durationCentiseconds": 5,
+  "movementFramesEachWay": 33,
+  "endpointHoldFrames": 10,
+  "description": "Independent static concrete base and barrel rotated about a fixed pivot. Art motion study, not an in-game animation.",
+  "frameCount": 84,
+  "loopSeconds": 4.2
+}
