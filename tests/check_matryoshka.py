@@ -55,6 +55,9 @@ for _,team in ipairs({101,102}) do
  devices[id].disabled=true
  SRW.UpdateCapsules(3);SRW.RefreshCapsuleVisuals(.04)
  assert(bot.DeployAge==age and #shots==0 and sprites[id]==frozen,'EMP did not freeze deployment')
+ -- Native idle/reload requests must not reveal a ready turret during EMP.
+ sprites[id]='Normal';SRW.RefreshCapsuleVisuals(.04)
+ assert(sprites[id]==frozen,'native fallback bypassed the EMP-frozen deployment pose')
  devices[id].disabled=false
  for i=1,60 do SRW.UpdateCapsules(.04) end
  assert(bot.Target==2 and #shots>0,'near reactor outranked enemy weapon behind turret')
@@ -94,7 +97,8 @@ end
 assert(SRW.Config.Matryoshka.Health==500 and SRW.Config.Matryoshka.MetalFireCost==600
  and SRW.Config.Matryoshka.EnergyFireCost==6000)
 ''')
-env=runpy.run_path(str(r/'tests/check_native_weapons.py'))['environment']
+native_checks=runpy.run_path(str(r/'tests/check_native_weapons.py'))
+env=native_checks['environment']
 native,load=env();load('mod/weapons/matryoshka_turret.lua')
 g=native.globals();assert g.HitPoints==500 and g.MinFireAngle==-180 and g.MaxFireAngle==180
 assert g.Root.Name=='MatryoshkaFixedBase' and g.Root.UserData==0
@@ -112,7 +116,7 @@ for _,sprite in g.Sprites.items():
   texture=sprite.States[state].Frames[1].texture
   assert not texture.endswith(('/deploy_00_right.png','/empty.png')), 'native fallback closes capsule'
 # Check the actual shipped native 20mm baseline, independent of SRW scaling.
-source=Path('C:/Program Files (x86)/Steam/steamapps/common/Forts/data/mods/weapon_pack/weapons/projectile_list.lua').read_text()
+source=(native_checks['game']/'mods/weapon_pack/weapons/projectile_list.lua').read_text(encoding='utf-8-sig')
 section=source[source.index('\n\tSaveName = "cannon20mm",\n'):];section=section[:section.index('DamageMultiplier')]
 assert float(re.search(r'ProjectileDamage\s*=\s*([\d.]+)',section)[1])*.5==45
 assert float(re.search(r'ProjectileSplashDamage\s*=\s*([\d.]+)',section)[1])*.5==10

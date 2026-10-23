@@ -18,7 +18,8 @@ See docs/KOLOKOL_ART.md and docs/MATRYOSHKA.md. The author approved capsule V4:
 traverse. Damage is half the native 20mm round (45 direct/10 splash).
 Kolokol art is now 30% larger; HE/incendiary blast radius is x1.5 with a native
 reactor-sized smoky plume and no Kolokol radius circle. Native verification of
-0.54.3 is still pending; do not claim it from automatic checks.
+0.54.3 and the 0.54.4 Matryoshka aiming/targeting/EMP-pose fixes is still pending;
+do not claim it from automatic checks.
 Hornet native visual acceptance, Krita retouching and Spear II remain deferred.
 Do not restart a prepared user flight scene or an active multiplayer match.
 See DEVELOPMENT_STATUS for current checks, unfinished work and acceptance.

@@ -50,8 +50,9 @@ local function updateGun(id,bot,cfg,dt)
         return a.Id<b.Id
     end)
     bot.Target=nil
-    for i,target in ipairs(candidates) do
-        if i>8 then break end
+    -- An obstructed group must not hide every reachable target behind it.
+    -- The sorted list still gives all enemy weapons priority over devices.
+    for _,target in ipairs(candidates) do
         local aim,spread,worthwhile=SRW.AimSolution(id,bot,cfg,target,dt,false)
         if worthwhile and SRW.ShotClearsTerrain(id,cfg,aim) and SRW.CanAimRobotWeapon(id,cfg,aim) then
             bot.Target=target.Id
@@ -126,12 +127,10 @@ function SRW.RefreshCapsuleVisuals(delta)
                 local gun=muzzle.x<head.x and "Left" or "Right"
                 state="Ready"..side..gun
             end
-            -- Fire/reload can reset native sprites without changing our cache.
-            -- Ready states are single still frames, so reasserting them has no
-            -- animation to restart and allocates no devices/effects.
-            if cache.State~=state or bot.DeployAge>=cfg.DeploySeconds then
-                SetDeviceSpriteState(id,state);cache.State=state
-            end
+            -- Native idle/reload can override any pose, including a deployment
+            -- frozen by EMP. Every state is a single still frame, so restoring
+            -- it has no animation to restart and allocates no devices/effects.
+            SetDeviceSpriteState(id,state)
             shown[id]=cache
         end
     end
