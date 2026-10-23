@@ -1,7 +1,7 @@
 -- Forts loads this entry point for an enabled mod.
 dofile("scripts/forts.lua")
 
-SRW = { Version = "0.53.0-hornet-art-sorties" }
+SRW = { Version = "0.53.1-hornet-aa-breakaway" }
 dofile(path .. "/scripts/config.lua")
 dofile(path .. "/scripts/robots/layout.lua")
 dofile(path .. "/scripts/combat/aiming.lua")

@@ -45,9 +45,52 @@ function SRW.SortieRocketsReady(id)
     return found
 end
 
+local function startOrbit(bot,p,cfg,cx,cy)
+    phase(bot,"orbit")
+    bot.SortieOrbitX=cx;bot.SortieOrbitY=cy
+    bot.SortieOrbitDirection=-(bot.SortieEscapeDirection or bot.SortieRunDirection or bot.Direction)
+    bot.SortieOrbitObserved=angle((p.x-cx)/cfg.OrbitRadiusX,(p.y-cy)/cfg.OrbitRadiusY)
+    bot.SortieOrbitSweep=0
+end
+
+-- Restore the projectile look-ahead that the new sortie path used to bypass.
+-- Only closing hostile rounds count; an enemy aircraft is not itself a shot.
+local function incomingFire(bot,p,cfg,dt,velocity)
+    bot.EvadeScan=math.max(0,(bot.EvadeScan or 0)-dt)
+    bot.EvadeRemaining=math.max(0,(bot.EvadeRemaining or 0)-dt)
+    if not cfg.EvasiveFlight or bot.EvadeScan>0 then return false end
+    bot.EvadeScan=.2
+    local side=bot.Team%100==1 and 2 or 1
+    local seen=0
+    for _,entry in ipairs(SRW.AirTargets(side)) do
+        if not entry.IsDevice and SRW.AirTargetAlive(entry,side) then
+            seen=seen+1;if seen>128 then break end
+            local v=SRW.AirTargetVelocity(entry)
+            local dx,dy=entry.Position.x-p.x,entry.Position.y-p.y
+            local vx,vy=v.x-velocity.x,v.y-velocity.y
+            local v2=vx*vx+vy*vy
+            local t=v2>1 and -(dx*vx+dy*vy)/v2 or -1
+            if t>0 and t<.85 and (dx+vx*t)^2+(dy+vy*t)^2<260^2 then
+                bot.EvadeRemaining=cfg.EgressSeconds
+                bot.EvadeSign=dy+vy*t>=0 and -1 or 1
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function startEgress(bot,p,cfg)
+    phase(bot,"egress")
+    bot.SortieEgressX=p.x+math.cos(bot.SortieHeading)*cfg.RunOutDistance
+    bot.SortieEgressY=p.y-cfg.BreakClimb
+    bot.Target=nil;bot.BurstRemaining=nil
+end
+
 function SRW.UpdateSortieFlight(id,bot,dt)
     local cfg=SRW.Config.Robots[bot.Kind]
     bot.Age=(bot.Age or 0)+dt
+    local previousVelocity=bot.AirVelocity or {x=0,y=0}
     bot.AirVelocity={x=0,y=0}
     if DeviceDisabled(id) or not IsDeviceFullyBuilt(id) then
         bot.BurstRemaining=nil
@@ -62,11 +105,29 @@ function SRW.UpdateSortieFlight(id,bot,dt)
     local point=target and target.Position
     local goal
     local ready=SRW.SortieRocketsReady(id)
-    if not point then
-        if bot.SortiePhase~="orbit" then phase(bot,"orbit") end
-        bot.SortieOrbitX=bot.HomeX or p.x
-        bot.SortieOrbitY=bot.CruiseY or p.y
-    elseif bot.SortiePhase=="approach" then
+    local incoming=incomingFire(bot,p,cfg,dt,previousVelocity)
+    if incoming then
+        -- The last attack target is a conservative keep-out anchor, not a claim
+        -- that the snapshot identifies which gun fired an incoming projectile.
+        if not bot.SortieDangerX then
+            bot.SortieDangerX=point and point.x or p.x
+            bot.SortieDangerY=point and point.y or p.y
+            bot.SortieEscapeDirection=p.x==bot.SortieDangerX
+                and (math.cos(bot.SortieHeading)>=0 and 1 or -1)
+                or (p.x>bot.SortieDangerX and 1 or -1)
+        end
+        bot.SortieSafetyExtra=math.min(cfg.OrbitStandOff,
+            (bot.SortieSafetyExtra or 0)+(cfg.WeaveHeight or 300))
+        local dx,dy=p.x-bot.SortieDangerX,p.y-bot.SortieDangerY
+        local clearance=cfg.OrbitStandOff+bot.SortieSafetyExtra
+        if bot.SortiePhase~="egress" and (bot.SortiePhase~="orbit" or dx*dx+dy*dy<clearance^2) then
+            startEgress(bot,p,cfg)
+        end
+    end
+    if not point and bot.SortiePhase~="egress" and bot.SortiePhase~="orbit" then
+        startOrbit(bot,p,cfg,bot.HomeX or p.x,bot.CruiseY or p.y)
+    end
+    if point and bot.SortiePhase=="approach" then
         bot.SortieRunDirection=bot.SortieRunDirection or (p.x<=point.x and 1 or -1)
         local dir=bot.SortieRunDirection
         goal=Vec3(point.x-dir*cfg.RunInDistance,point.y-cfg.PassAltitude,0)
@@ -90,29 +151,49 @@ function SRW.UpdateSortieFlight(id,bot,dt)
         end
         if bot.SortieTime>=cfg.AttackSeconds or dir*(p.x-point.x)>cfg.RunOutDistance
             or (bot.SortieTime>=.4 and gunDone and (bot.SortieGunOnly or rocketsDone)) then
-            phase(bot,"egress")
-            bot.SortieEgressX=p.x+math.cos(bot.SortieHeading)*cfg.RunOutDistance
-            bot.SortieEgressY=p.y-cfg.BreakClimb
-            bot.Target=nil;bot.BurstRemaining=nil
+            startEgress(bot,p,cfg)
         end
-    elseif bot.SortiePhase=="egress" then
+    end
+    if bot.SortiePhase=="egress" then
         goal=Vec3(bot.SortieEgressX or p.x,bot.SortieEgressY or p.y-400,0)
-        if bot.SortieTime>=cfg.EgressSeconds then
-            phase(bot,"orbit")
-            bot.SortieOrbitX=point.x-(bot.SortieRunDirection or bot.Direction)*cfg.OrbitStandOff
-            bot.SortieOrbitY=point.y-cfg.OrbitAltitude
-            bot.SortieOrbitAngle=angle((p.x-bot.SortieOrbitX)/cfg.OrbitRadiusX,
-                (p.y-bot.SortieOrbitY)/cfg.OrbitRadiusY)
+        local clear=true
+        local anchor=point or {x=bot.HomeX or p.x,y=bot.CruiseY or p.y}
+        local outward=bot.SortieRunDirection or bot.Direction
+        local extra=0
+        if bot.SortieDangerX then
+            anchor={x=bot.SortieDangerX,y=bot.SortieDangerY}
+            outward=bot.SortieEscapeDirection
+            extra=bot.SortieSafetyExtra or 0
+            local separation=cfg.OrbitStandOff+extra
+            local dx,dy=p.x-anchor.x,p.y-anchor.y
+            clear=dx*dx+dy*dy>=separation^2
+            goal=Vec3(anchor.x+outward*(separation+cfg.OrbitRadiusX),
+                math.min(p.y,anchor.y-cfg.OrbitAltitude)-cfg.BreakClimb,0)
+        end
+        if bot.SortieTime>=cfg.EgressSeconds and clear then
+            -- Keep the waiting loop on the side just exited. The previous minus
+            -- sign sent aircraft back through the defended target to reach it.
+            startOrbit(bot,p,cfg,anchor.x+outward*(cfg.OrbitStandOff+extra),
+                anchor.y-cfg.OrbitAltitude-extra*.25)
         end
     end
     if bot.SortiePhase=="orbit" then
         local cx,cy=bot.SortieOrbitX or p.x,bot.SortieOrbitY or bot.CruiseY or p.y
-        bot.SortieOrbitAngle=(bot.SortieOrbitAngle or 0)+bot.Direction*cfg.OrbitRate*dt
-        local a=bot.SortieOrbitAngle+bot.Direction*.4
-        goal=Vec3(cx+cfg.OrbitRadiusX*math.cos(a),cy+cfg.OrbitRadiusY*math.sin(a),0)
-        if point and ((ready and bot.SortieTime>=cfg.MinimumOrbitSeconds)
-            or bot.SortieTime>=cfg.GunDiveSeconds) then
+        local a=angle((p.x-cx)/cfg.OrbitRadiusX,(p.y-cy)/cfg.OrbitRadiusY)
+        local direction=bot.SortieOrbitDirection or -(bot.SortieRunDirection or bot.Direction)
+        -- Count actual signed progress, not a clock advancing a disconnected
+        -- waypoint. Reversals subtract progress instead of completing a loop.
+        bot.SortieOrbitSweep=math.max(0,(bot.SortieOrbitSweep or 0)
+            +difference(a,bot.SortieOrbitObserved or a)*direction)
+        bot.SortieOrbitObserved=a
+        local lookahead=a+direction*.55
+        goal=Vec3(cx+cfg.OrbitRadiusX*math.cos(lookahead),cy+cfg.OrbitRadiusY*math.sin(lookahead),0)
+        if point and bot.SortieOrbitSweep>=2*math.pi and bot.EvadeRemaining==0
+            and ((ready and bot.SortieTime>=cfg.MinimumOrbitSeconds)
+                or bot.SortieTime>=cfg.GunDiveSeconds) then
             phase(bot,"approach");bot.SortieRunDirection=nil
+            bot.SortieDangerX=nil;bot.SortieDangerY=nil
+            bot.SortieEscapeDirection=nil;bot.SortieSafetyExtra=nil
         end
     end
     goal=goal or Vec3(p.x+math.cos(bot.SortieHeading)*500,p.y+math.sin(bot.SortieHeading)*500,0)
