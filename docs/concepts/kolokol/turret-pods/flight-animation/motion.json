@@ -1,0 +1,748 @@
+{
+  "sourceConcept": "02_telescope",
+  "requestedIndustrialRevisionAvailable": false,
+  "size": [
+    1120,
+    700
+  ],
+  "fps": 20,
+  "frameCount": 140,
+  "durationSeconds": 7,
+  "groundY": 610,
+  "landingX": 820,
+  "phases": [
+    {
+      "name": "FLIGHT",
+      "frames": 48,
+      "seconds": 2.4
+    },
+    {
+      "name": "LANDING",
+      "frames": 8,
+      "seconds": 0.4
+    },
+    {
+      "name": "UNFOLD",
+      "frames": 24,
+      "seconds": 1.2
+    },
+    {
+      "name": "EXTEND",
+      "frames": 24,
+      "seconds": 1.2
+    },
+    {
+      "name": "DEPLOYED",
+      "frames": 28,
+      "seconds": 1.4
+    },
+    {
+      "name": "RESET",
+      "frames": 8,
+      "seconds": 0.4
+    }
+  ],
+  "method": "Image-generated parts, kinematic flight pose, independently rotating shell panels and extending column sections; art preview only.",
+  "records": [
+    {
+      "frame": 0,
+      "phase": "FLIGHT",
+      "phaseProgress": 0
+    },
+    {
+      "frame": 1,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.0213
+    },
+    {
+      "frame": 2,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.0426
+    },
+    {
+      "frame": 3,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.0638
+    },
+    {
+      "frame": 4,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.0851
+    },
+    {
+      "frame": 5,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.1064
+    },
+    {
+      "frame": 6,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.1277
+    },
+    {
+      "frame": 7,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.1489
+    },
+    {
+      "frame": 8,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.1702
+    },
+    {
+      "frame": 9,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.1915
+    },
+    {
+      "frame": 10,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.2128
+    },
+    {
+      "frame": 11,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.234
+    },
+    {
+      "frame": 12,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.2553
+    },
+    {
+      "frame": 13,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.2766
+    },
+    {
+      "frame": 14,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.2979
+    },
+    {
+      "frame": 15,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.3191
+    },
+    {
+      "frame": 16,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.3404
+    },
+    {
+      "frame": 17,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.3617
+    },
+    {
+      "frame": 18,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.383
+    },
+    {
+      "frame": 19,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.4043
+    },
+    {
+      "frame": 20,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.4255
+    },
+    {
+      "frame": 21,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.4468
+    },
+    {
+      "frame": 22,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.4681
+    },
+    {
+      "frame": 23,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.4894
+    },
+    {
+      "frame": 24,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.5106
+    },
+    {
+      "frame": 25,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.5319
+    },
+    {
+      "frame": 26,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.5532
+    },
+    {
+      "frame": 27,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.5745
+    },
+    {
+      "frame": 28,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.5957
+    },
+    {
+      "frame": 29,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.617
+    },
+    {
+      "frame": 30,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.6383
+    },
+    {
+      "frame": 31,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.6596
+    },
+    {
+      "frame": 32,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.6809
+    },
+    {
+      "frame": 33,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.7021
+    },
+    {
+      "frame": 34,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.7234
+    },
+    {
+      "frame": 35,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.7447
+    },
+    {
+      "frame": 36,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.766
+    },
+    {
+      "frame": 37,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.7872
+    },
+    {
+      "frame": 38,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.8085
+    },
+    {
+      "frame": 39,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.8298
+    },
+    {
+      "frame": 40,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.8511
+    },
+    {
+      "frame": 41,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.8723
+    },
+    {
+      "frame": 42,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.8936
+    },
+    {
+      "frame": 43,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.9149
+    },
+    {
+      "frame": 44,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.9362
+    },
+    {
+      "frame": 45,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.9574
+    },
+    {
+      "frame": 46,
+      "phase": "FLIGHT",
+      "phaseProgress": 0.9787
+    },
+    {
+      "frame": 47,
+      "phase": "FLIGHT",
+      "phaseProgress": 1
+    },
+    {
+      "frame": 48,
+      "phase": "LANDING",
+      "phaseProgress": 0
+    },
+    {
+      "frame": 49,
+      "phase": "LANDING",
+      "phaseProgress": 0.1429
+    },
+    {
+      "frame": 50,
+      "phase": "LANDING",
+      "phaseProgress": 0.2857
+    },
+    {
+      "frame": 51,
+      "phase": "LANDING",
+      "phaseProgress": 0.4286
+    },
+    {
+      "frame": 52,
+      "phase": "LANDING",
+      "phaseProgress": 0.5714
+    },
+    {
+      "frame": 53,
+      "phase": "LANDING",
+      "phaseProgress": 0.7143
+    },
+    {
+      "frame": 54,
+      "phase": "LANDING",
+      "phaseProgress": 0.8571
+    },
+    {
+      "frame": 55,
+      "phase": "LANDING",
+      "phaseProgress": 1
+    },
+    {
+      "frame": 56,
+      "phase": "UNFOLD",
+      "phaseProgress": 0
+    },
+    {
+      "frame": 57,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.0435
+    },
+    {
+      "frame": 58,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.087
+    },
+    {
+      "frame": 59,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.1304
+    },
+    {
+      "frame": 60,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.1739
+    },
+    {
+      "frame": 61,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.2174
+    },
+    {
+      "frame": 62,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.2609
+    },
+    {
+      "frame": 63,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.3043
+    },
+    {
+      "frame": 64,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.3478
+    },
+    {
+      "frame": 65,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.3913
+    },
+    {
+      "frame": 66,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.4348
+    },
+    {
+      "frame": 67,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.4783
+    },
+    {
+      "frame": 68,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.5217
+    },
+    {
+      "frame": 69,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.5652
+    },
+    {
+      "frame": 70,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.6087
+    },
+    {
+      "frame": 71,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.6522
+    },
+    {
+      "frame": 72,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.6957
+    },
+    {
+      "frame": 73,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.7391
+    },
+    {
+      "frame": 74,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.7826
+    },
+    {
+      "frame": 75,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.8261
+    },
+    {
+      "frame": 76,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.8696
+    },
+    {
+      "frame": 77,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.913
+    },
+    {
+      "frame": 78,
+      "phase": "UNFOLD",
+      "phaseProgress": 0.9565
+    },
+    {
+      "frame": 79,
+      "phase": "UNFOLD",
+      "phaseProgress": 1
+    },
+    {
+      "frame": 80,
+      "phase": "EXTEND",
+      "phaseProgress": 0
+    },
+    {
+      "frame": 81,
+      "phase": "EXTEND",
+      "phaseProgress": 0.0435
+    },
+    {
+      "frame": 82,
+      "phase": "EXTEND",
+      "phaseProgress": 0.087
+    },
+    {
+      "frame": 83,
+      "phase": "EXTEND",
+      "phaseProgress": 0.1304
+    },
+    {
+      "frame": 84,
+      "phase": "EXTEND",
+      "phaseProgress": 0.1739
+    },
+    {
+      "frame": 85,
+      "phase": "EXTEND",
+      "phaseProgress": 0.2174
+    },
+    {
+      "frame": 86,
+      "phase": "EXTEND",
+      "phaseProgress": 0.2609
+    },
+    {
+      "frame": 87,
+      "phase": "EXTEND",
+      "phaseProgress": 0.3043
+    },
+    {
+      "frame": 88,
+      "phase": "EXTEND",
+      "phaseProgress": 0.3478
+    },
+    {
+      "frame": 89,
+      "phase": "EXTEND",
+      "phaseProgress": 0.3913
+    },
+    {
+      "frame": 90,
+      "phase": "EXTEND",
+      "phaseProgress": 0.4348
+    },
+    {
+      "frame": 91,
+      "phase": "EXTEND",
+      "phaseProgress": 0.4783
+    },
+    {
+      "frame": 92,
+      "phase": "EXTEND",
+      "phaseProgress": 0.5217
+    },
+    {
+      "frame": 93,
+      "phase": "EXTEND",
+      "phaseProgress": 0.5652
+    },
+    {
+      "frame": 94,
+      "phase": "EXTEND",
+      "phaseProgress": 0.6087
+    },
+    {
+      "frame": 95,
+      "phase": "EXTEND",
+      "phaseProgress": 0.6522
+    },
+    {
+      "frame": 96,
+      "phase": "EXTEND",
+      "phaseProgress": 0.6957
+    },
+    {
+      "frame": 97,
+      "phase": "EXTEND",
+      "phaseProgress": 0.7391
+    },
+    {
+      "frame": 98,
+      "phase": "EXTEND",
+      "phaseProgress": 0.7826
+    },
+    {
+      "frame": 99,
+      "phase": "EXTEND",
+      "phaseProgress": 0.8261
+    },
+    {
+      "frame": 100,
+      "phase": "EXTEND",
+      "phaseProgress": 0.8696
+    },
+    {
+      "frame": 101,
+      "phase": "EXTEND",
+      "phaseProgress": 0.913
+    },
+    {
+      "frame": 102,
+      "phase": "EXTEND",
+      "phaseProgress": 0.9565
+    },
+    {
+      "frame": 103,
+      "phase": "EXTEND",
+      "phaseProgress": 1
+    },
+    {
+      "frame": 104,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0
+    },
+    {
+      "frame": 105,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.037
+    },
+    {
+      "frame": 106,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.0741
+    },
+    {
+      "frame": 107,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.1111
+    },
+    {
+      "frame": 108,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.1481
+    },
+    {
+      "frame": 109,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.1852
+    },
+    {
+      "frame": 110,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.2222
+    },
+    {
+      "frame": 111,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.2593
+    },
+    {
+      "frame": 112,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.2963
+    },
+    {
+      "frame": 113,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.3333
+    },
+    {
+      "frame": 114,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.3704
+    },
+    {
+      "frame": 115,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.4074
+    },
+    {
+      "frame": 116,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.4444
+    },
+    {
+      "frame": 117,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.4815
+    },
+    {
+      "frame": 118,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.5185
+    },
+    {
+      "frame": 119,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.5556
+    },
+    {
+      "frame": 120,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.5926
+    },
+    {
+      "frame": 121,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.6296
+    },
+    {
+      "frame": 122,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.6667
+    },
+    {
+      "frame": 123,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.7037
+    },
+    {
+      "frame": 124,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.7407
+    },
+    {
+      "frame": 125,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.7778
+    },
+    {
+      "frame": 126,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.8148
+    },
+    {
+      "frame": 127,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.8519
+    },
+    {
+      "frame": 128,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.8889
+    },
+    {
+      "frame": 129,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.9259
+    },
+    {
+      "frame": 130,
+      "phase": "DEPLOYED",
+      "phaseProgress": 0.963
+    },
+    {
+      "frame": 131,
+      "phase": "DEPLOYED",
+      "phaseProgress": 1
+    },
+    {
+      "frame": 132,
+      "phase": "RESET",
+      "phaseProgress": 0
+    },
+    {
+      "frame": 133,
+      "phase": "RESET",
+      "phaseProgress": 0.1429
+    },
+    {
+      "frame": 134,
+      "phase": "RESET",
+      "phaseProgress": 0.2857
+    },
+    {
+      "frame": 135,
+      "phase": "RESET",
+      "phaseProgress": 0.4286
+    },
+    {
+      "frame": 136,
+      "phase": "RESET",
+      "phaseProgress": 0.5714
+    },
+    {
+      "frame": 137,
+      "phase": "RESET",
+      "phaseProgress": 0.7143
+    },
+    {
+      "frame": 138,
+      "phase": "RESET",
+      "phaseProgress": 0.8571
+    },
+    {
+      "frame": 139,
+      "phase": "RESET",
+      "phaseProgress": 1
+    }
+  ]
+}

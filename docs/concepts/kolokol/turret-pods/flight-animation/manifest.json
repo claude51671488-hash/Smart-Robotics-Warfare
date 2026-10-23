@@ -1,0 +1,142 @@
+{
+  "created_date": "2026-10-23",
+  "source_concept": "02_telescope",
+  "requested_industrial_v2_available": false,
+  "status": "art animation preview; not game-tested",
+  "gif": "matryoshka_flight_deploy.gif",
+  "frames": 140,
+  "fps": 20,
+  "duration_ms": 7000,
+  "phases": [
+    "FLIGHT",
+    "LANDING",
+    "UNFOLD",
+    "EXTEND",
+    "DEPLOYED",
+    "RESET"
+  ],
+  "assets": [
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/deployed_preview.png",
+      "bytes": 269469,
+      "sha256": "a3ba952564567e6ec881875e448c7e6eb3833473ddaceee6615ba508fda02076",
+      "git_blob_sha": "3d4f22c50db889d2628ba6f6a5475c9cd94254cd",
+      "width": 1120,
+      "height": 700,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/keyframes.png",
+      "bytes": 187041,
+      "sha256": "e991f394abae6201736aa7488fdbb43ec87142098ffbbdf88582208f79eec7d8",
+      "git_blob_sha": "e755d7223b847b0a3599bc25f97e57c6e8032919",
+      "width": 2240,
+      "height": 350,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/layers.png",
+      "bytes": 2046976,
+      "sha256": "e8c73301940093f44051c3b1992914add367f54fe2cb57602bab25a6929b3464",
+      "git_blob_sha": "8099d357afaf9fb9b3d6ea180c0f4e750e5dfc9f",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/matryoshka_flight_deploy.gif",
+      "bytes": 2582284,
+      "sha256": "c77317a7de260019f59ba1cae820b789d5d88941cc77abd290aa3db7f35cdba1",
+      "git_blob_sha": "e770c2e286123d9c65865725d4428aad595884ed",
+      "width": 1120,
+      "height": 700,
+      "format": "GIF",
+      "frames": 140,
+      "duration_ms": 7000
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/motion.json",
+      "bytes": 13064,
+      "sha256": "a387b4b1ff4d95d83d28f5b4ac2118884ef62fb3c2a1f2a47012a1bc1e750294",
+      "git_blob_sha": "b12d8c37bbbac117990ea9de23dab6ec1c46f4d4"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/render.mjs",
+      "bytes": 6416,
+      "sha256": "9174c204ff7bb7709b0efa546f48c131b9a180afa412d6630768e3569077dd0c",
+      "git_blob_sha": "2abcb8c270d77eb13c01cd764ad5922405f50940"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/base.png",
+      "bytes": 25921,
+      "sha256": "acaac90687058ee6cc1f57713b1d135520174da7b413a5dd604bdd6e8bc31e17",
+      "git_blob_sha": "cfaee92b0b09893fa864451829a8715499aca7d3",
+      "width": 140,
+      "height": 85,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/capsule.png",
+      "bytes": 36998,
+      "sha256": "56bfd1320df7c22f42805c3306216cac7b3dccf0f8b8a033ad986505b20385b0",
+      "git_blob_sha": "65432627887d7ec1f5be810d47bb136e62a13158",
+      "width": 107,
+      "height": 180,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/head.png",
+      "bytes": 26518,
+      "sha256": "7b6da9a3e1d5a5a3d39ddad2941f402ac0e0329b6209acf293ecd6d3fcc1bc46",
+      "git_blob_sha": "ac9ad09614db091d5ec9f7b8b0fc228a9488899a",
+      "width": 150,
+      "height": 110,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/left.png",
+      "bytes": 12833,
+      "sha256": "2ecb5cb4c24c26924df528cedc7398b71f4f76d806b720696e9a6e614fee28ab",
+      "git_blob_sha": "ad56c54aa76188266a977d17dab89ec068b9ce4d",
+      "width": 50,
+      "height": 145,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/lower.png",
+      "bytes": 19955,
+      "sha256": "40f534d3424068490e7c759bb28c921630a7dde4ce845ff8c996a29db7043d4c",
+      "git_blob_sha": "14fbbcf2cb6b00fb42ba201fbf95dd073ad2e00c",
+      "width": 95,
+      "height": 110,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/rear.png",
+      "bytes": 13514,
+      "sha256": "a353aa9659410f7b9ab9d51e68e916d429078a891f0c862ee06bdeefb95f0dde",
+      "git_blob_sha": "f33d59e142862605793e95b3bfb09b12e2ad78de",
+      "width": 80,
+      "height": 90,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/right.png",
+      "bytes": 12764,
+      "sha256": "74d2c760bf28cf1d4f1f902cf5a6bafe41c333b4a7cc8b6f1822ffb84c80560b",
+      "git_blob_sha": "f8027a63027b56adf761240baa0b5e9eb13cad4a",
+      "width": 50,
+      "height": 145,
+      "format": "PNG"
+    },
+    {
+      "path": "docs/concepts/kolokol/turret-pods/flight-animation/sprites/upper.png",
+      "bytes": 14673,
+      "sha256": "dd076b085b6c6dabb1428a43118471d0c16888446a917c61d8ffd986957672f4",
+      "git_blob_sha": "6f97647d660455be242c3bf79bd0a12a3738cb55",
+      "width": 70,
+      "height": 100,
+      "format": "PNG"
+    }
+  ]
+}
