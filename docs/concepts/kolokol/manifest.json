@@ -1,7 +1,7 @@
 {
   "created_date": "2026-10-23",
   "title": "Kolokol siege mortar concepts",
-  "image_count": 5,
+  "image_count": 6,
   "generator": "OpenAI image generation",
   "status": "static concept art; not game-ready textures or animation",
   "original_weapon_source_available": false,
@@ -55,6 +55,22 @@
       "bytes": 1905287,
       "sha256": "12f9e7245d4912c04ccb75a5f1291030eeffbaac70451bc5ad04a38f4ca78642",
       "git_blob_sha": "d8f026f0c3c520736a0dd6134e1590b0f8fd9db6"
+    },
+    {
+      "id": "02_bastion_v2",
+      "file": "images/02_bastion_v2.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "bytes": 1857640,
+      "sha256": "67a73097d1b28a242311f893e8036506bd8a2796f3a5988b8ffc9fb5987a4ee8",
+      "git_blob_sha": "ed524c0fcf63b5b7608b196ba2032d08d0a31fd0",
+      "derived_from": "02_bastion",
+      "revision": 2
     }
-  ]
+  ],
+  "original_concept_count": 5,
+  "selected_direction": "02_bastion",
+  "latest_revision": "02_bastion_v2",
+  "updated_date": "2026-10-23"
 }

@@ -45,3 +45,11 @@ VARIANT TEXT: 05 / SENTINEL
 DESIGN: Robotic siege system suited to Smart Robotics Warfare. One short very wide graphite high angle mortar tube with thick stepped bell lip; clean pale-gray faceted armored panels cover its lower breech. External compact servo arm on left of weapon with simple articulated gripper parked near loading hatch. Small subtle cyan slit sensor (not giant glowing eye), red team-color panel, clearly visible side pivot and hydraulic recoil rail, low wide stationary bolted footing. Advanced but grounded machine, no legs, no humanoid, no giant glowing energy rings or laser barrel.
 ```
 
+
+## Selected direction — Bastion V2
+
+Image edit of `images/02_bastion.png`, requested by the user on 2026-10-23. Output: `images/02_bastion_v2.png`. The user selected Bastion; V2 is the requested proportion exploration and is not yet approved as a final production asset. Approximate size changes in the prompt are art-direction targets, not measured geometry.
+
+```text
+Отредактируй приложенный концепт вымышленного игрового объекта «Колокол — Бастион» для компьютерной игры Forts. Это статичный рисованный игровой арт на светлом фоне. Сохрани нижний бронированный корпус, опору, цветовую гамму и общий художественный стиль исходного изображения. Измени пропорции верхней наклонной трубы: сделай её заметно длиннее (примерно в полтора раза) и шире по всей длине (примерно на четверть) относительно прежнего основания. Сохрани один открытый раструб и кольца на трубе. Нижний корпус не увеличивай. Сохрани наклон вправо вверх; весь объект должен помещаться в кадр без обрезания. При необходимости добавь свободное место сверху и справа. Заголовок KOLOKOL, подзаголовок 02 / BASTION V2. Маленький силуэт внизу приведи в соответствие с новыми пропорциями. Только мирная демонстрация дизайна вымышленного игрового объекта, без персонажей, боевых сцен, выстрелов, снарядов и технических чертежей.
+```
