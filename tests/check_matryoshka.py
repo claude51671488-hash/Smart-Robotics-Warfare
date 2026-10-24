@@ -11,8 +11,12 @@ function NodeExists(n) return nodes[n]~=nil and not nodes[n].retired end
 function NodePosition(n) return nodes[n].pos end
 function GetNodeProjectileSaveName(n) return nodes[n].name end
 function EnableWeapon() end
+function EnableDevice() end
+function GetDeviceHitpoints(id) return devices[id].hp or 500 end
+function DeleteDeviceById(id) devices[id]=nil;return true end
+function ApplyDamageToDevice(id,n) devices[id].hp=500-n end
 function dlc2_CreateFloatingDevice(team,kind,p,angle)
- assert(kind=='srw_matryoshka_turret' and angle==90)
+ assert((kind=='srw_matryoshka_turret' or kind=='srw_matryoshka_deploying') and angle==90)
  if failed then return -1 end
  serial=serial+1;devices[serial]={team=team,kind=kind,pos=p,built=true};return serial
 end
@@ -55,32 +59,36 @@ for _,team in ipairs({101,102}) do
  local count=serial;SRW.CapsuleImpact(901,team,'srw_kolokol_capsule',DESTROYTYPE_HITTERRAIN)
  assert(serial==count,'duplicate destroy event created a second turret')
  function SRW.DeviceTargets(side)
-  assert(side==(devices[id].team%100==1 and 2 or 1))
+  local current=next(data.srw.CapsuleTurrets)
+  assert(side==(devices[current].team%100==1 and 2 or 1))
   return {{Id=1,Kind='reactor',Position=Vec3(340,-90,0)},
           {Id=2,Kind='enemy_gun',Position=Vec3(-300,-90,0)}}
  end
  devices[1]={kind='reactor'};devices[2]={kind='enemy_gun'}
  SRW.UpdateCapsules(.5);assert(#shots==0,'fired before opening')
- assert(devices[id].reload==0,'opening did not hold native reload progress at zero')
+ assert(devices[id].kind=='srw_matryoshka_deploying' and devices[id].reload==nil,'opening still uses a reloadable weapon')
  SRW.RefreshCapsuleVisuals(.04);local frozen=sprites[id];local age=bot.DeployAge
  devices[id].disabled=true
  SRW.UpdateCapsules(3);SRW.RefreshCapsuleVisuals(.04)
  assert(bot.DeployAge==age and #shots==0 and sprites[id]==frozen,'EMP did not freeze deployment')
+ -- Native idle/reload requests must not reveal a ready turret during EMP.
+ sprites[id]='Normal';SRW.RefreshCapsuleVisuals(.04)
+ assert(sprites[id]==frozen,'native fallback bypassed the EMP-frozen deployment pose')
  devices[id].disabled=false
  for i=1,60 do SRW.UpdateCapsules(.04) end
+ id=next(data.srw.CapsuleTurrets)
  assert(bot.Target==2 and #shots>0,'near reactor outranked enemy weapon behind turret')
  assert(shots[1].Aim.x<devices[id].pos.x,'rear target was filtered out')
  assert(devices[id].pos.x==300 and devices[id].pos.y==0,'turret walked')
  gunLeft=true;SRW.RefreshCapsuleVisuals(.04)
- assert(sprites[id]==(team==101 and 'ReadyRightAim90' or 'ReadyLeftAim90'),'left gun state inverted')
+ assert(sprites[id]=='Ready','ready pose still depends on facing')
  gunLeft=false;SRW.RefreshCapsuleVisuals(.04)
- assert(sprites[id]==(team==101 and 'ReadyRightAim0' or 'ReadyLeftAim0'))
+ assert(sprites[id]=='Ready')
  -- Forts may request Normal/Idle again at the end of a native reload. A
  -- completed capsule must repair that change even when our desired state has
  -- not changed since the previous rendering callback.
  sprites[id]='Normal';SRW.RefreshCapsuleVisuals(.04)
- assert(sprites[id]==(team==101 and 'ReadyRightAim0' or 'ReadyLeftAim0'),
-  'native idle/reload reset left the turret closed')
+ assert(sprites[id]=='Normal','ready renderer still replaces native gun motion with facing snapshots')
  -- Capture changes the target side on the next tick; no stale owner survives.
  devices[id].team=team==101 and 102 or 101;SRW.UpdateCapsules(.04)
  assert(bot.Team==devices[id].team)
@@ -119,32 +127,34 @@ end
 assert(SRW.Config.Matryoshka.Health==500 and SRW.Config.Matryoshka.MetalFireCost==600
  and SRW.Config.Matryoshka.EnergyFireCost==6000)
 ''')
-env=runpy.run_path(str(r/'tests/check_native_weapons.py'))['environment']
+native_checks=runpy.run_path(str(r/'tests/check_native_weapons.py'))
+env=native_checks['environment']
 native,load=env();load('mod/weapons/matryoshka_turret.lua')
 g=native.globals();assert g.HitPoints==500 and g.MinFireAngle==-180 and g.MaxFireAngle==180
 assert g.Root.Name=='MatryoshkaFixedBase' and g.Root.UserData==0
 geo=json.loads((r/'ui/textures/weapons/matryoshka/geometry.json').read_text())
-head=g.Root.ChildrenInFront[1];barrel=head.ChildrenInFront[1]
+head=g.Root.ChildrenInFront[1];barrel=head.ChildrenBehind[1]
 assert head.UserData==50 and barrel.UserData==100
 assert abs((head.Pivot[2]+barrel.PivotOffset[2])*geo['Height'])<1e-6
-for side in ('Right','Left'):
- for index in range(48):
-  state=f'Deploy{side}{index}'
-  assert g.Sprites[1].States[state] is not None
-assert len(g.Sprites)==1, 'multiple visible sprites can overlay deployment'
-assert head.Sprite.endswith('/empty.png') and barrel.Sprite.endswith('/empty.png')
-assert len(head.ChildrenInFront)==1, 'static breech was left above animated root'
-assert geo['AimFrames']==180
-for side in ('Right','Left'):
- for pose in range(geo['AimFrames']):
-  texture=g.Sprites[1].States[f'Ready{side}Aim{pose}'].Frames[1].texture
-  assert (r/texture.removeprefix('mod/')).is_file()
-for _,sprite in g.Sprites.items():
- for state in ('Normal','Idle','Reload','ReloadEnd'):
+assert len(g.Sprites)==3
+assert head.Sprite=='srw-matryoshka-pivot' and barrel.Sprite=='srw-matryoshka-barrel'
+assert len(head.ChildrenBehind)==1 and head.ChildrenInFront is None
+assert geo.get('AimFrames') is None, 'ready renderer still quantizes native rotation'
+for index,sprite in g.Sprites.items():
+ for state in ('Normal','Idle','Reload','ReloadEnd','Ready'):
   texture=sprite.States[state].Frames[1].texture
-  assert not texture.endswith(('/deploy_00_right.png','/empty.png')), 'native fallback closes capsule'
+  assert texture==sprite.States['Normal'].Frames[1].texture, 'native idle creates a second facing'
+  assert (r/texture.removeprefix('mod/')).is_file()
+ assert sprite.States.DeployRight0 is None, 'weapon still owns opening frames'
+opening,podload=env();podload('mod/devices/matryoshka_deploying.lua')
+pod=opening.globals()
+assert pod.HitPoints==500 and pod.Root.Name=='MatryoshkaOpening'
+assert len(pod.Sprites)==1 and pod.Root.ChildrenInFront is None
+for side in ('Right','Left'):
+ for i in range(48):
+  assert pod.Sprites[1].States[f'Deploy{side}{i}'] is not None
 # Check the actual shipped native 20mm baseline, independent of SRW scaling.
-source=Path('C:/Program Files (x86)/Steam/steamapps/common/Forts/data/mods/weapon_pack/weapons/projectile_list.lua').read_text()
+source=(native_checks['game']/'mods/weapon_pack/weapons/projectile_list.lua').read_text(encoding='utf-8-sig')
 section=source[source.index('\n\tSaveName = "cannon20mm",\n'):];section=section[:section.index('DamageMultiplier')]
 assert float(re.search(r'ProjectileDamage\s*=\s*([\d.]+)',section)[1])*.5==45
 assert float(re.search(r'ProjectileSplashDamage\s*=\s*([\d.]+)',section)[1])*.5==10

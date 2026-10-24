@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'ui/textures/weapons/kolokol'
 CANVAS=(768,384)
-UNIT=.65  # User requested a 30% larger mortar, including its mount and muzzle.
+UNIT=1.457699443413729  # KS30 visible horizontal span: 1746 * 1.2 * .375 = 785.6999999999999.
 
 def place(image,pivot,destination,scale=1,angle=0,size=CANVAS):
     c,s=math.cos(angle),math.sin(angle)
@@ -45,7 +45,7 @@ def export():
     base_layer=place(base,(0,0),base_origin,ratio)
     tube_layer=place(long,old_pivot,joint,ratio,angle)
     length=math.dist(muzzle,old_pivot)*ratio
-    geometry=dict(Width=CANVAS[0],Height=CANVAS[1],Scale=UNIT,
+    geometry=dict(ReferenceSpan=785.7,HorizontalArtSpan=539,Width=CANVAS[0],Height=CANVAS[1],Scale=UNIT,
         JointX=joint[0],JointY=joint[1],FootX=foot[0],FootY=foot[1],
         MuzzleX=joint[0]+length,MuzzleY=joint[1],
         OriginalBoreLength=math.dist(old_muzzle,old_pivot)*ratio,

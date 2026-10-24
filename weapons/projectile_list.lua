@@ -52,12 +52,12 @@ clone("machinegun", "srw_aa_bullet", {
 })
 clone("mortar2", "srw_kolokol_he", {
     ProjectileDamage=135, ProjectileSplashDamage=270,
-    ProjectileSplashDamageMaxRadius=270, DisableShields=false, -- previous radius x1.5 before common scaling
+    ProjectileSplashDamageMaxRadius=540, DisableShields=false, -- current radius x2; common pass gives 1350
 })
 -- Preserve native incendiary effects and background ignition.
 clone("mortar", "srw_kolokol_incendiary", {
     ProjectileDamage=30, ProjectileSplashDamage=105,
-    ProjectileSplashDamageMaxRadius=225, -- previous radius x1.5 before common scaling
+    ProjectileSplashDamageMaxRadius=450, -- current radius x2; common pass gives 1125
 })
 -- Inert delivery shell. Terrain contact is handled once by the runtime script.
 clone("mortar2","srw_kolokol_capsule",{

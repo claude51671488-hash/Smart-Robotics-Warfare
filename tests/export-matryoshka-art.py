@@ -45,9 +45,10 @@ def export():
     capsule.save(OUT/'capsule.png',optimize=True)
     empty=Image.new('RGBA',SIZE);empty.save(OUT/'empty.png')
     base=parts['base'];lower=parts['lower'];upper=parts['upper']
-    head=parts['head'];barrel=parts['barrel']
-    head_anchor=(head.width*.86,head.height*.68)
-    barrel_anchor=(barrel.width*.08,barrel.height*.5)
+    head=fit(trim(Image.open(ROOT/'art/kolokol/matryoshka-round-housing.png').convert('RGBA')),100)
+    barrel=parts['barrel']
+    head_anchor=(head.width*.5,head.height*.5)
+    barrel_anchor=(barrel.width*.08-35,barrel.height*.5)
     head_layer=place(head,head_anchor,JOINT)
     barrel_layer=place(barrel,barrel_anchor,JOINT)
     for name,im in [('head',head_layer),('barrel',barrel_layer)]:
@@ -61,55 +62,56 @@ def export():
         rear=parts['rear'];left=parts['left'];right=parts['right']
         canvas.alpha_composite(place(rear,(rear.width/2,rear.height*.9),(192,286),math.radians(88)*opening))
         canvas.alpha_composite(place(lower,(lower.width/2,lower.height),(192,288-24*extension)))
-        canvas.alpha_composite(place(upper,(upper.width/2,upper.height),(192,280-93*extension)))
+        # The telescoping sections overlap by 8 pixels at full extension.
+        upper_end=264-lower.height+8
+        canvas.alpha_composite(place(upper,(upper.width/2,upper.height),(192,280+(upper_end-280)*extension)))
         for panel,x,sign,delay in [(left,172,-1,0),(right,212,1,.08)]:
             a=ease((t-delay)/.48)
             canvas.alpha_composite(place(panel,(panel.width/2,panel.height*.9),(x,286),sign*math.radians(84)*a))
         canvas.alpha_composite(place(base,(base.width/2,base.height),FOOT))
+        gun=Image.new('RGBA',SIZE)
+        joint=JOINT
         if i<48:
             joint=(192,268-136*extension)
             fold=-math.pi/2*(1-ease((t-.65)/.35))
-            canvas.alpha_composite(place(head,head_anchor,joint,-fold))
-            canvas.alpha_composite(place(barrel,barrel_anchor,joint,fold))
+            # Round housing belongs to the support, never the native rotating gun.
+            canvas.alpha_composite(place(head,head_anchor,joint))
+            gun.alpha_composite(place(barrel,barrel_anchor,joint,fold))
             # Opening starts with the same compact closed silhouette. The panels
             # are revealed continuously; no per-frame effect/device allocation.
             alpha=1-ease(t/.18)
             reveal=ease(t/.18)
             canvas.putalpha(canvas.getchannel('A').point(lambda a:round(a*reveal)))
+            gun.putalpha(gun.getchannel('A').point(lambda a:round(a*reveal)))
             if alpha>0:
                 cover=fit(capsule,44);cover.putalpha(cover.getchannel('A').point(lambda a:round(a*alpha)))
                 canvas.alpha_composite(place(cover,(cover.width/2,cover.height),FOOT))
+        else:
+            canvas.alpha_composite(head_layer)
+            gun.alpha_composite(barrel_layer)
         for side in ('right','left'):
             image=canvas if side=='right' else canvas.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
             name=f'deploy_{i:02d}_{side}.png' if i<48 else f'ready_{side}.png'
             image.save(OUT/name,optimize=True)
+            barrel_image=gun if side=='right' or i==48 else gun.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+            barrel_name=f'deploy_barrel_{i:02d}_{side}.png' if i<48 else f'ready_barrel_{side}.png'
+            barrel_image.save(OUT/barrel_name,optimize=True)
+            if i<48:
+                opening=image.copy();opening.alpha_composite(barrel_image)
+                opening.save(OUT/f'opening_{i:02d}_{side}.png',optimize=True)
         if i in (0,12,24,36,47):
-            bg=Image.new('RGBA',SIZE,'#e6e2d8');bg.alpha_composite(canvas);frames.append(bg)
+            bg=Image.new('RGBA',SIZE,'#e6e2d8');bg.alpha_composite(canvas);bg.alpha_composite(gun);frames.append(bg)
     final=Image.open(OUT/'ready_right.png').convert('RGBA')
-    final.alpha_composite(head_layer);final.alpha_composite(barrel_layer)
+    final.alpha_composite(barrel_layer)
     bg=Image.new('RGBA',SIZE,'#e6e2d8');bg.alpha_composite(final);frames.append(bg)
     preview=Image.new('RGBA',(SIZE[0]*6,SIZE[1]))
     for i,im in enumerate(frames):preview.alpha_composite(im,(i*SIZE[0],0))
     preview.convert('RGB').save(ROOT/'art/kolokol/matryoshka-deployment.jpg',quality=92)
-    # Only Root is visible in game. Native Head/Barrel remain collision/aiming
-    # pivots with empty textures; no static gun can overlay a deployment frame.
-    # Fixed supports are composed with one rigid, independently rotated gun.
-    for side in ('right','left'):
-        support=Image.open(OUT/f'ready_{side}.png').convert('RGBA')
-        for pose in range(180):
-            angle=pose*2*math.pi/180
-            a=head_anchor;b=barrel_anchor;h=head;bar=barrel
-            if math.cos(angle)<0:
-                h=head.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
-                bar=barrel.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
-                a=(a[0],h.height-a[1]);b=(b[0],bar.height-b[1])
-            canvas=support.copy()
-            canvas.alpha_composite(place(h,a,JOINT,angle))
-            canvas.alpha_composite(place(bar,b,JOINT,angle))
-            canvas.save(OUT/f'aim_{pose:03d}_{side}.png',optimize=True)
-    geometry=dict(AimFrames=180,Width=SIZE[0],Height=SIZE[1],Scale=.55,FootX=192,FootY=296,
+    # Ready art is two disjoint responsibilities: fixed support/housing and
+    # the one native moving barrel. No composite aim-frame switching survives.
+    geometry=dict(Width=SIZE[0],Height=SIZE[1],Scale=.55,FootX=192,FootY=296,
         JointX=JOINT[0],JointY=JOINT[1],MuzzleX=JOINT[0]+barrel.width-barrel_anchor[0],MuzzleY=JOINT[1],Frames=48)
     (OUT/'geometry.json').write_text(json.dumps(geometry,indent=2)+'\n')
     (OUT/'geometry.lua').write_text('SRWMatryoshkaGeometry={'+','.join(f'{k}={v}' for k,v in geometry.items())+'}\n')
-    print('Matryoshka: 48 rigid deployment poses per side, independent gun, exact approved flight capsule')
+    print('Matryoshka: connected support and symmetric housing, 48 two-layer opening poses, native barrel')
 if __name__=='__main__':export()

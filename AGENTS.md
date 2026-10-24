@@ -16,9 +16,17 @@ HE-B and incendiary-A ammunition art, and a simpler low-tech Matryoshka capsule.
 See docs/KOLOKOL_ART.md and docs/MATRYOSHKA.md. The author approved capsule V4:
 500 HP, shot cost 600 metal/6000 energy, weapons-first targeting and near-360
 traverse. Damage is half the native 20mm round (45 direct/10 splash).
-Kolokol art is now 30% larger; HE/incendiary blast radius is x1.5 with a native
-reactor-sized smoky plume and no Kolokol radius circle. Native verification of
-0.54.3 is still pending; do not claim it from automatic checks.
+Latest author request (24 October), version 0.54.9: fixed Kolokol trunnion
+position with native Head firing orientation (Root hardpoint fired forward).
+Measured KS30 span, HE/incendiary radii 1350/1125, instant/fading mushroom and
+short visual-only native ShockWave sequence remain. Opening is now a separate
+non-weapon device, replaced atomically by the real turret after 2.4 active seconds
+with HP/owner preserved; EMP pauses it. Ready art has fixed symmetric housing,
+connected telescoping stand and a single native moving barrel. Do not restore
+whole-turret aim snapshots or use weapon reload states for opening. 0.54.8 was
+not accepted: author still saw opening flicker. 0.54.9 is installed, source checks
+68/68 and native parse 180/180 pass; fresh gameplay opening/mortar checks remain.
+See docs/KOLOKOL_0549.md and DEVELOPMENT_STATUS for actual native evidence.
 Hornet native visual acceptance, Krita retouching and Spear II remain deferred.
 Do not restart a prepared user flight scene or an active multiplayer match.
 See DEVELOPMENT_STATUS for current checks, unfinished work and acceptance.

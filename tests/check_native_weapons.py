@@ -1,8 +1,8 @@
 """Load actual installed native Lua definitions, then SRW overrides. Not a render test."""
 from pathlib import Path
-import sys
+import os,sys
 r=Path(__file__).resolve().parents[1]
-game=Path('C:/Program Files (x86)/Steam/steamapps/common/Forts/data')
+game=Path(os.environ.get('FORTS_DATA_ROOT','C:/Program Files (x86)/Steam/steamapps/common/Forts/data'))
 sys.path.insert(0,str(r.parent/'.srw-tools'))
 from lupa import LuaRuntime
 

@@ -25,7 +25,7 @@ registration.execute(source)
 registration.execute(source)
 registration.execute('assert(#Sprites == 2 and Devices[2].Icon == "srw-kega-icon" and Devices[4].Detail == "srw-kega-icon")')
 registration.execute('assert(Devices[4].dlc2_BuildAnywhere and Devices[4].BuildOnGroundOnly, "floating bot requires ground-device registration")')
-registration.execute('assert(#Devices == 17 and Devices[1].SaveName == "mine" and Devices[2].PopulationCap == 1)')
+registration.execute('assert(#Devices == 18 and Devices[1].SaveName == "mine" and Devices[2].PopulationCap == 1)')
 registration.globals().dofile=lambda name: registration.execute((root/name.replace('mods/srw/','')).read_text()) if name.startswith('mods/srw/') else None
 registration.execute((root / 'devices/factory_ground_1.lua').read_text())
 registration.execute('assert(#Sprites == 0 and Root.Sprite == "srw-factory-animation")')

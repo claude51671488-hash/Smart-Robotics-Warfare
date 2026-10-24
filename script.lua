@@ -1,7 +1,7 @@
 -- Forts loads this entry point for an enabled mod.
 dofile("scripts/forts.lua")
 
-SRW = { Version = "0.54.4-matryoshka-contact-rig" }
+SRW = { Version = "0.54.9-isolated-opening" }
 dofile(path .. "/scripts/config.lua")
 dofile(path .. "/scripts/robots/layout.lua")
 dofile(path .. "/scripts/combat/aiming.lua")
@@ -118,7 +118,7 @@ function OnProjectileDestroyed(nodeId,teamId,saveName,structureIdHit,destroyType
 end
 
 function OnWeaponFired(teamId,saveName,weaponId,projectileNodeId,projectileNodeIdFrom)
-    SRW.TrackCapsule(teamId,projectileNodeId)
+    SRW.TrackCapsule(teamId,projectileNodeId,weaponId)
     SRW.EngineeringShot(weaponId)
     SRW.HornetShot(weaponId)
     SRW.GuidedLaunch(teamId,weaponId,projectileNodeId)

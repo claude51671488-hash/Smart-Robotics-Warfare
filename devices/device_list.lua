@@ -146,3 +146,10 @@ for _,name in ipairs({"engineer_bot","field_bunker","field_bunker_left","field_m
         BuildTimeComplete=.2,ScrapPeriod=.2,MetalCost=0,EnergyCost=0,
         MetalRepairCost=50,EnergyRepairCost=500,SelectEffect="ui/hud/devices/ui_devices"})
 end
+
+-- Internal landing stage; it cannot aim, fire, or reset gun reload states.
+RegisterSRWDevice({SaveName="srw_matryoshka_deploying",FileName=path.."/devices/matryoshka_deploying.lua",
+ Icon="srw-kega-icon",Detail="srw-kega-icon",Enabled=false,ExcludeUnlockAll=true,
+ dlc2_BuildAnywhere=true,BuildOnGroundOnly=true,NoReclaim=true,BuildTimeComplete=.04,
+ ScrapPeriod=.04,MetalCost=0,EnergyCost=0,MetalRepairCost=0,EnergyRepairCost=0,
+ MaxUpAngle=90,SelectEffect="ui/hud/devices/ui_devices"})

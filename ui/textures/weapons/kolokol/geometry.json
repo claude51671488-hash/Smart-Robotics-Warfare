@@ -1,7 +1,7 @@
 {
   "Width": 768,
   "Height": 384,
-  "Scale": 0.65,
+  "Scale": 1.457699443413729,
   "JointX": 233.25,
   "JointY": 285.0,
   "FootX": 255.25,
@@ -10,5 +10,7 @@
   "MuzzleY": 285.0,
   "OriginalBoreLength": 289.4686943349833,
   "BoreLength": 361.67500950438915,
-  "ExtensionRatio": 1.2494442977168585
+  "ExtensionRatio": 1.2494442977168585,
+  "ReferenceSpan": 785.6999999999999,
+  "HorizontalArtSpan": 539
 }

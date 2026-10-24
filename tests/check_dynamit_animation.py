@@ -1,6 +1,6 @@
 """Independent per-device states, stopped/EMP/fuse poses and native asset bindings."""
 from pathlib import Path
-import sys,struct
+import os,sys,struct
 r=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(r.parent/'.srw-tools'))
 from lupa import LuaRuntime
@@ -53,7 +53,7 @@ assert(#calls==first+4,'rendering skips intermediate poses')
 SRW.RefreshDynamitAnimation(3,c);SRW.RefreshDynamitVisuals(.01)
 assert(calls[#calls][2]=='IdleRight','stationary feet kept extrapolating')
 ''')
-game=Path('C:/Program Files (x86)/Steam/steamapps/common/Forts/data')
+game=Path(os.environ.get('FORTS_DATA_ROOT','C:/Program Files (x86)/Steam/steamapps/common/Forts/data'))
 l=LuaRuntime();l.execute('path="mod"')
 def inc(name):
     p=r/name[4:] if name.startswith('mod/') else game/name
