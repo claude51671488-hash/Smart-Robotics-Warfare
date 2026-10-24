@@ -1,7 +1,8 @@
 -- A terrain-only delivery lifecycle. No disappearance/mid-air spawn heuristic.
 function SRW.TrackCapsule(team,node)
     if NodeExists(node) and GetNodeProjectileSaveName(node)=="srw_kolokol_capsule" then
-        data.srw.CapsuleFlights[node]={Team=team,Age=0}
+        local p=NodePosition(node)
+        data.srw.CapsuleFlights[node]={Team=team,Age=0,Position={x=p.x,y=p.y}}
     end
 end
 function SRW.CapsuleImpact(node,team,name,cause)
@@ -14,7 +15,23 @@ function SRW.CapsuleImpact(node,team,name,cause)
     data.srw.CapsuleFlights[node]={Team=team,Age=0,Consumed=true}
     if not team or team<=0 or cause~=DESTROYTYPE_HITTERRAIN then return end
     local p=NodePosition(node)
-    local ground=SRW.GroundAt(p.x,p.y,300)
+    -- Collision callbacks can report the end of a fast physics step below
+    -- the surface. A walking robot's 25-unit step ray misses such impacts.
+    local ground
+    if flight and flight.Position then
+        local previous=Vec3(flight.Position.x,flight.Position.y,0)
+        if CastGroundRay(previous,p,0)==RAY_HIT_TERRAIN then
+            local hit=GetRayHitPosition();ground=Vec3(hit.x,hit.y,0)
+        end
+    end
+    if not ground then
+        -- Covers a restored in-flight projectile without a cached previous
+        -- position: max launch speed 9000 * .04 seconds is 360 units per tick.
+        local above=math.min(p.y,flight and flight.Position and flight.Position.y or p.y)-512
+        if CastGroundRay(Vec3(p.x,above,0),Vec3(p.x,p.y+300,0),0)==RAY_HIT_TERRAIN then
+            local hit=GetRayHitPosition();ground=Vec3(hit.x,hit.y,0)
+        end
+    end
     if not ground then
         Log("[SRW] Capsule terrain impact has no placement surface: node="..node)
         return
@@ -75,6 +92,9 @@ function SRW.UpdateCapsules(dt)
     local cfg=SRW.Config.Matryoshka
     for node,flight in pairs(data.srw.CapsuleFlights) do
         flight.Age=flight.Age+dt
+        if not flight.Consumed and NodeExists(node) then
+            local p=NodePosition(node);flight.Position={x=p.x,y=p.y}
+        end
         -- Node removal and the confirmed destruction callback need not arrive
         -- in the same tick. Keep the bounded record until that callback (or
         -- the projectile's maximum lifetime plus two seconds), without ever
@@ -123,8 +143,10 @@ function SRW.RefreshCapsuleVisuals(delta)
                 state="Deploy"..side..math.min(47,math.floor(age/cfg.DeploySeconds*48))
             else
                 local head=GetWeaponBarrelPosition(id);local muzzle=GetWeaponHardpointPosition(id)
-                local gun=muzzle.x<head.x and "Left" or "Right"
-                state="Ready"..side..gun
+                local angle=(math.atan2 or math.atan)(muzzle.y-head.y,muzzle.x-head.x)
+                local frames=cfg.AimFrames
+                local pose=math.floor((angle%(2*math.pi))*frames/(2*math.pi)+.5)%frames
+                state="Ready"..side.."Aim"..pose
             end
             -- Fire/reload can reset native sprites without changing our cache.
             -- Ready states are single still frames, so reasserting them has no

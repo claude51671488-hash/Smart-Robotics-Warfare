@@ -1,7 +1,7 @@
 -- Forts loads this entry point for an enabled mod.
 dofile("scripts/forts.lua")
 
-SRW = { Version = "0.54.3-kolokol-smoke-blast" }
+SRW = { Version = "0.54.4-matryoshka-contact-rig" }
 dofile(path .. "/scripts/config.lua")
 dofile(path .. "/scripts/robots/layout.lua")
 dofile(path .. "/scripts/combat/aiming.lua")

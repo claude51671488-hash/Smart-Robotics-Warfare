@@ -18,7 +18,18 @@ function dlc2_CreateFloatingDevice(team,kind,p,angle)
 end
 function GetWeaponReloadPeriodById(id) return .04 end
 function SetWeaponReloadTime(id,time) assert(time>=0 and time<=.04);devices[id].reload=time end
-function SRW.GroundAt(x,y) return Vec3(x,0,0) end
+RAY_HIT_TERRAIN=3;RAY_HIT_NOTHING=0
+local rayHit
+function CastGroundRay(a,b)
+ if a.y<=0 and b.y>=0 and b.y>a.y then
+  local t=-a.y/(b.y-a.y);rayHit=Vec3(a.x+(b.x-a.x)*t,0,0);return RAY_HIT_TERRAIN
+ end
+ return RAY_HIT_NOTHING
+end
+function GetRayHitPosition() return rayHit end
+function SRW.GroundAt(x,y,reach)
+ if CastGroundRay(Vec3(x,y-25,0),Vec3(x,y+reach,0),0)==RAY_HIT_TERRAIN then return rayHit end
+end
 function GetWeaponBarrelPosition(id) return Vec3(devices[id].pos.x,-90,0) end
 local gunLeft=false
 function GetWeaponHardpointPosition(id)
@@ -61,14 +72,14 @@ for _,team in ipairs({101,102}) do
  assert(shots[1].Aim.x<devices[id].pos.x,'rear target was filtered out')
  assert(devices[id].pos.x==300 and devices[id].pos.y==0,'turret walked')
  gunLeft=true;SRW.RefreshCapsuleVisuals(.04)
- assert(sprites[id]==(team==101 and 'ReadyRightLeft' or 'ReadyLeftLeft'),'left gun state inverted')
+ assert(sprites[id]==(team==101 and 'ReadyRightAim90' or 'ReadyLeftAim90'),'left gun state inverted')
  gunLeft=false;SRW.RefreshCapsuleVisuals(.04)
- assert(sprites[id]==(team==101 and 'ReadyRightRight' or 'ReadyLeftRight'))
+ assert(sprites[id]==(team==101 and 'ReadyRightAim0' or 'ReadyLeftAim0'))
  -- Forts may request Normal/Idle again at the end of a native reload. A
  -- completed capsule must repair that change even when our desired state has
  -- not changed since the previous rendering callback.
  sprites[id]='Normal';SRW.RefreshCapsuleVisuals(.04)
- assert(sprites[id]==(team==101 and 'ReadyRightRight' or 'ReadyLeftRight'),
+ assert(sprites[id]==(team==101 and 'ReadyRightAim0' or 'ReadyLeftAim0'),
   'native idle/reload reset left the turret closed')
  -- Capture changes the target side on the next tick; no stale owner survives.
  devices[id].team=team==101 and 102 or 101;SRW.UpdateCapsules(.04)
@@ -88,6 +99,20 @@ for _,team in ipairs({101,102}) do
  SRW.CapsuleImpact(905,team,'srw_kolokol_capsule',DESTROYTYPE_HITTERRAIN)
  assert(next(data.srw.CapsuleTurrets),'untracked native terrain impact was discarded')
  data.srw.CapsuleTurrets={}
+ -- Native collision coordinates were observed 53-58 units inside the ground.
+ -- Reproduce a fast oblique final step, rather than a slow vertical QA drop.
+ nodes[906]={name='srw_kolokol_capsule',pos=Vec3(300,-200,0)};SRW.TrackCapsule(team,906)
+ nodes[906].pos=Vec3(320,57,0);nodes[906].retired=true
+ SRW.CapsuleImpact(906,team,'srw_kolokol_capsule',DESTROYTYPE_HITTERRAIN)
+ local impactId=next(data.srw.CapsuleTurrets)
+ assert(impactId,'fast terrain impact failed to deploy')
+ local at=devices[impactId].pos
+ assert(at.y==0 and math.abs(at.x-(300+20*200/257))<.001,'landing ignored final flight segment')
+ data.srw.CapsuleTurrets={}
+ nodes[907]={name='srw_kolokol_capsule',pos=Vec3(300,58,0)}
+ SRW.CapsuleImpact(907,team,'srw_kolokol_capsule',DESTROYTYPE_HITTERRAIN)
+ assert(next(data.srw.CapsuleTurrets),'restored untracked fast impact failed')
+ data.srw.CapsuleTurrets={}
  flight(904,team);nodes[904]=nil;SRW.UpdateCapsules(63)
  assert(not data.srw.CapsuleFlights[904],'expired capsule leaked flight state')
 end
@@ -105,8 +130,15 @@ assert abs((head.Pivot[2]+barrel.PivotOffset[2])*geo['Height'])<1e-6
 for side in ('Right','Left'):
  for index in range(48):
   state=f'Deploy{side}{index}'
-  for _,sprite in g.Sprites.items():assert sprite.States[state] is not None
-  assert g.Sprites[2].States[state].Frames[1].texture.endswith('/empty.png')
+  assert g.Sprites[1].States[state] is not None
+assert len(g.Sprites)==1, 'multiple visible sprites can overlay deployment'
+assert head.Sprite.endswith('/empty.png') and barrel.Sprite.endswith('/empty.png')
+assert len(head.ChildrenInFront)==1, 'static breech was left above animated root'
+assert geo['AimFrames']==180
+for side in ('Right','Left'):
+ for pose in range(geo['AimFrames']):
+  texture=g.Sprites[1].States[f'Ready{side}Aim{pose}'].Frames[1].texture
+  assert (r/texture.removeprefix('mod/')).is_file()
 for _,sprite in g.Sprites.items():
  for state in ('Normal','Idle','Reload','ReloadEnd'):
   texture=sprite.States[state].Frames[1].texture

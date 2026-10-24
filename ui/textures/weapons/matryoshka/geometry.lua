@@ -1,1 +1,1 @@
-SRWMatryoshkaGeometry={Width=384,Height=320,Scale=0.55,FootX=192,FootY=296,JointX=192,JointY=132,MuzzleX=284.0,MuzzleY=132,Frames=48}
+SRWMatryoshkaGeometry={AimFrames=180,Width=384,Height=320,Scale=0.55,FootX=192,FootY=296,JointX=192,JointY=132,MuzzleX=284.0,MuzzleY=132,Frames=48}

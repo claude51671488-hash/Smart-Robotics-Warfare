@@ -91,7 +91,23 @@ def export():
     preview=Image.new('RGBA',(SIZE[0]*6,SIZE[1]))
     for i,im in enumerate(frames):preview.alpha_composite(im,(i*SIZE[0],0))
     preview.convert('RGB').save(ROOT/'art/kolokol/matryoshka-deployment.jpg',quality=92)
-    geometry=dict(Width=SIZE[0],Height=SIZE[1],Scale=.55,FootX=192,FootY=296,
+    # Only Root is visible in game. Native Head/Barrel remain collision/aiming
+    # pivots with empty textures; no static gun can overlay a deployment frame.
+    # Fixed supports are composed with one rigid, independently rotated gun.
+    for side in ('right','left'):
+        support=Image.open(OUT/f'ready_{side}.png').convert('RGBA')
+        for pose in range(180):
+            angle=pose*2*math.pi/180
+            a=head_anchor;b=barrel_anchor;h=head;bar=barrel
+            if math.cos(angle)<0:
+                h=head.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+                bar=barrel.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+                a=(a[0],h.height-a[1]);b=(b[0],bar.height-b[1])
+            canvas=support.copy()
+            canvas.alpha_composite(place(h,a,JOINT,angle))
+            canvas.alpha_composite(place(bar,b,JOINT,angle))
+            canvas.save(OUT/f'aim_{pose:03d}_{side}.png',optimize=True)
+    geometry=dict(AimFrames=180,Width=SIZE[0],Height=SIZE[1],Scale=.55,FootX=192,FootY=296,
         JointX=JOINT[0],JointY=JOINT[1],MuzzleX=JOINT[0]+barrel.width-barrel_anchor[0],MuzzleY=JOINT[1],Frames=48)
     (OUT/'geometry.json').write_text(json.dumps(geometry,indent=2)+'\n')
     (OUT/'geometry.lua').write_text('SRWMatryoshkaGeometry={'+','.join(f'{k}={v}' for k,v in geometry.items())+'}\n')
