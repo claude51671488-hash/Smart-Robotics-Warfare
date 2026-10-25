@@ -7,6 +7,9 @@
 
 Исходники мода Forts для работы с компьютера и телефона. [Текущая задача, принятые решения и ограничения проверки](docs/DEVELOPMENT_STATUS.md).
 
+Новые визуальные предложения от 25 октября: [«Архангел II» и «Копьё II»](docs/concepts/air-tier-2/README.md).
+Два концепта в стилистике референсов; внешний вид пока не утверждён.
+
 В репозитории также сохранены [концепты «Колокола»](docs/concepts/kolokol/README.md),
 [анимация ствола](docs/concepts/kolokol/animation/README.md) и
 [полёт и раскрытие «Матрёшки»](docs/concepts/kolokol/turret-pods/flight-animation-v2/README.md)

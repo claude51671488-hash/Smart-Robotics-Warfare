@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-25",
+  "status": "proposed_visual_concepts",
+  "tier": 2,
+  "branch": "air",
+  "generated_with": "imagegen",
+  "images": [
+    {
+      "name": "Архангел II",
+      "file": "images/archangel-ii-v1.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "sha256": "c08854db396e9e8296e501b7307ec7eee67d8b522d9b6b485fc55face748ce0c"
+    },
+    {
+      "name": "Копьё II",
+      "file": "images/spear-ii-v1.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGB",
+      "sha256": "997e425dddeed8980a6ed631d97fb5f5abb347793a3fe023e129edf85752d50b"
+    }
+  ]
+}
