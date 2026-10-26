@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "status": "proposed_visual_concepts",
+  "status": "v2_visual_revision_and_animation_preview",
   "tier": 2,
   "branch": "air",
   "generated_with": "imagegen",
@@ -20,6 +20,50 @@
       "height": 793,
       "mode": "RGB",
       "sha256": "997e425dddeed8980a6ed631d97fb5f5abb347793a3fe023e129edf85752d50b"
+    },
+    {
+      "name": "Архангел II — V2",
+      "file": "images/archangel-ii-v2.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "sha256": "021891b6d01d4308a44b534736bfb26c732aa5175b6aaad0920dee158850ec2b"
+    },
+    {
+      "name": "Копьё II — V2",
+      "file": "images/spear-ii-v2.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGB",
+      "sha256": "9757c40880150e126e1aa4cf26a05e0ff04863812900d81f0e7f337db0b689f0"
+    },
+    {
+      "name": "Архангел II — детали GIF",
+      "file": "animation/archangel-ii-parts-v2.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "sha256": "360e426ccfe70458b1432c62230a718bb1c3e6fba2401088740612836fffd2da"
+    }
+  ],
+  "author_direction": {
+    "archangel": "Retain cruiser; vertical missile launch through opening top hatches.",
+    "spear": "Wide hull with two lateral engine nacelles."
+  },
+  "revision_date": "2026-10-26",
+  "animations": [
+    {
+      "file": "animation/archangel-ii-v2.gif",
+      "width": 1200,
+      "height": 760,
+      "frames": 160,
+      "fps": 20,
+      "duration_ms": 8000,
+      "loop": 0,
+      "sha256": "c8c320773600c3d91ec637ec8825b313f31dcdf0181f13261b178b8fddc85957",
+      "renderer": "animation/render_preview.py",
+      "source": "animation/archangel-ii-parts-v2.png",
+      "status": "concept_preview_not_game_capture"
     }
   ]
 }
