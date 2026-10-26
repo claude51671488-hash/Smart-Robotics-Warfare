@@ -74,3 +74,35 @@ SECOND image is ONLY the CAMERA / 2D PROJECTION reference: perfectly horizontal,
 Remove the FIRST image's overhead angle and exaggerated depth. The central upper hull must look like a horizontal side wall, NOT a broad sloping top deck; all parallel longitudinal seams horizontal. The visible engine is a straight horizontal side silhouette; its front intake is an extremely narrow edge at the right end, NOT a visible oval or circular face. Nose barrel and lower turret point directly right parallel to the picture plane. The missile above the engine points horizontally right. No top-down surfaces, no foreshortening, no 3/4 angle. One compact connected fictional unmanned game vehicle, all elements in side profile. Flat 2D cel shaded game asset style with thick clear black outline and restrained surface details, no dramatic lighting. Keep the warm very light grey backdrop and broad horizontal composition. No people, action, terrain, text, inset, or second vehicle. Entire model fits inside canvas.
 ```
 
+
+
+## GIF «Копья» V3 — нижний лазер и пуск ракеты
+
+26 октября 2026: автор попросил движение нижнего орудия и отдельно напомнил
+про пуск ракеты. Защитный лазер подтверждён ролью №26 в APPROVED_CONCEPTS.md.
+
+### Отделение нижнего орудия
+
+Вход: `images/spear-ii-v3.png`. Выход: `animation/spear-ii-parts-turret-only.png`.
+Прозрачный фон включён для сборки слоёв GIF.
+
+```text
+Prepare animation cutouts from this exact fictional Spear II 2D game model. Keep the same strict right-facing SIDE VIEW, flat olive/charcoal cel shading, outline, proportions, long horizontal nose barrel, visible side engine, small recessed red-tipped shape above engine and its existing tiny engine exhaust. This is a peaceful isolated videogame art asset.
+Produce ONE TRANSPARENT RGBA parts atlas, wide 2:1 or 5:2 aspect, with precisely TWO separate components and generous clear empty gutters.
+UPPER AREA: the entire exact vehicle EXCEPT its small underslung rectangular defensive laser turret. Keep all main hull, engine and long nose cannon details identical to the reference. At the lower turret attachment location retain only a SHORT fixed suspension bracket that ends in a small round pivot bearing facing the viewer. Remove the rectangular lower turret housing, its red front lens, and the curved hose attached to that moving housing from the hull component. Nothing else is removed or redesigned. Whole hull fits with margin; long nose barrel fully visible.
+LOWER AREA, centered below the hull with a large transparent gap: ONE detached cutout of that original small rectangular lower turret, enlarged about twice for clarity. Preserve its olive rectangular rear housing with bolts, short charcoal rectangular front section and red lens pointing horizontally RIGHT. Put a clear circular mounting bearing at the LEFT/rear portion of the housing, so the rigid component can pivot there, not around its center or its muzzle. No hose, no hanging hull section, no pedestal attached to this moving part. It is one compact continuous component, matching the original lower turret's appearance. No duplicate turret.
+NO complete assembled model elsewhere, no third component, no text, labels, frames, painted checkerboard, background or shadows. All artwork on true transparency. Orthographic side projection throughout, NO top-down or three-quarter perspective.
+```
+
+### Добавление отдельной ракеты
+
+Вход: предыдущий лист. Выход: `animation/spear-ii-parts-v3.png`.
+Прозрачность сохранена.
+
+```text
+Edit this exact transparent fictional Spear II videogame animation parts sheet to ALSO separate its small olive and red-tipped missile sprite for a peaceful game animation preview. Maintain the same transparent background, side-on right-facing projection, canvas proportions, hull geometry, nose barrel, engine, and already detached lower laser sprite. No action scene, no people, no scenery, no technical annotations.
+Keep the upper hull exactly where it is. In its recessed shoulder bay (small red-tipped horizontal shape above center of body), REMOVE ONLY THE MISSILE, leaving a clean empty dark recess and the existing mounting rail. Do not remove the surrounding armor. The launcher recess is now visibly empty.
+Preserve the detached defensive laser cutout in the lower center with its circular bearing and red front optic.
+Add a THIRD standalone cutout in the clear lower-left quadrant: ONE complete small olive cylindrical missile pointing horizontally RIGHT, red pointed nose at right, small dark tail fins at left and its short orange-yellow propulsion flame attached behind the tail to the left. This sprite should match the original bay missile, illustrated about twice as large as when seated inside the upper hull. Keep plenty of transparent space between all three cutouts and away from canvas edges. Do not attach this third cutout to the lower turret. Exactly three separate items total: hull with empty bay, detached lower turret, detached missile with short exhaust. All parts in flat 2D side view with original olive/charcoal cel shading and dark contour. No titles, borders, checkerboard, additional parts or extra vehicle.
+```
+

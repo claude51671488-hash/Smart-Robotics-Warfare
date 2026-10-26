@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "status": "archangel_v2_preview_spear_v3_side_model",
+  "status": "air_tier_2_concepts_and_motion_previews",
   "tier": 2,
   "branch": "air",
   "generated_with": "imagegen",
@@ -60,11 +60,28 @@
       "height": 793,
       "mode": "RGB",
       "sha256": "8ba7d22e2c1c662b37e1816befaa5082e8292d96ceb550294fee4b7483937090"
+    },
+    {
+      "name": "Копьё II — корпус и нижнее орудие",
+      "file": "animation/spear-ii-parts-turret-only.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGBA",
+      "sha256": "b9d11cd144d023aa3ad9496064f273ebfa2b95b56d592d3f7045e4e5e3936165"
+    },
+    {
+      "name": "Копьё II — корпус, нижнее орудие и ракета",
+      "file": "animation/spear-ii-parts-v3.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGBA",
+      "sha256": "7fd8ce674219be54fe7bd8e969eba0b2b37e9bde3aff8ee1e5719aa0818a8c58"
     }
   ],
   "author_direction": {
     "archangel": "Retain cruiser; vertical missile launch through opening top hatches.",
-    "spear": "Wide hull with two lateral engine nacelles; strict right-facing side elevation. Far nacelle is occluded by near nacelle."
+    "spear": "Wide hull with two lateral engine nacelles; strict right-facing side elevation. Far nacelle is occluded by near nacelle.",
+    "spear_animation": "Animate lower defensive laser and shoulder missile launch; keep hull and axial cannon fixed."
   },
   "revision_date": "2026-10-26",
   "animations": [
@@ -79,6 +96,19 @@
       "sha256": "c8c320773600c3d91ec637ec8825b313f31dcdf0181f13261b178b8fddc85957",
       "renderer": "animation/render_preview.py",
       "source": "animation/archangel-ii-parts-v2.png",
+      "status": "concept_preview_not_game_capture"
+    },
+    {
+      "file": "animation/spear-ii-v3.gif",
+      "width": 1200,
+      "height": 600,
+      "frames": 160,
+      "fps": 20,
+      "duration_ms": 8000,
+      "loop": 0,
+      "sha256": "9c183b8962e08e589c63045c3f7d2a9e65077f27ad48dc3e652d23e00c77a4dc",
+      "renderer": "animation/render_spear_preview.py",
+      "source": "animation/spear-ii-parts-v3.png",
       "status": "concept_preview_not_game_capture"
     }
   ]
