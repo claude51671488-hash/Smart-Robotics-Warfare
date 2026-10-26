@@ -45,3 +45,32 @@ LOWER HALF: ONE HORIZONTAL ROW of FIVE DISTINCT SEPARATED CUTOUT COMPONENTS with
 Each part is an independent RGBA cutout. Flat orthographic side view, exactly consistent rendering. This is a mechanical animation asset sheet that will be assembled with rigid pivots; NO complete guns attached to the hull, NO assembled craft duplicate. Make the five parts large and crisp, not miniatures.
 ```
 
+
+
+## «Копьё» V3 — боковая игровая проекция
+
+26 октября 2026: автор попросил боковой вид вместо ракурса три четверти.
+Фон непрозрачный. Два последовательных редактирования через imagegen.
+
+### Промежуточный боковой эскиз
+
+Вход: `images/spear-ii-v2.png`. Выход: `images/spear-ii-v3-side-study.png`.
+
+```text
+Reorient the supplied fictional robot vehicle concept for the 2D strategy videogame Forts. This is a peaceful isolated game-art asset, with no people, combat, destruction, or weapon use. Draw the SAME vehicle exactly SIDE-ON, facing RIGHT, as a flat orthographic 2D sprite model reference. Preserve its broad armored body, two side-mounted engine pods, long central nose cannon, recessed shoulder missile shapes, and small underside turret as visual features of the fictional design.
+The camera is exactly perpendicular to the vehicle's side at the same height: NO front view, NO three-quarter view, NO overhead view, NO isometric perspective. Main barrel perfectly horizontal, nose right and engine exhaust left. Top surfaces invisible. Side pod is a horizontal elongated engine housing, with front and rear end faces seen edge-on. In this true side elevation the far-side engine is naturally hidden behind the near-side engine and body. Do NOT stack the engines vertically and do NOT rotate the camera to show both. Retain the compact broad-body version from this reference, with the near engine alongside the back half of the hull, a wedge-shaped front, and a long nose barrel. Keep all parts visibly connected. The main cannon is shown at full length from the side, not foreshortened.
+Match the reference's olive-green painted panels, dark steel, bolts, small yellow stripes, tiny red optics, thick dark outlines and clean 2D cel shading. Simplify tiny details for readability as a side-view game unit. No attack effects. Whole model centered with generous clear margins on the same plain warm light grey background. One single side view only, no text, no extra views, no diagram. Wide horizontal composition.
+```
+
+### Основная модель V3
+
+Входы: промежуточный эскиз (дизайн), `images/spear-ii-v1.png` (только проекция).
+Выход: `images/spear-ii-v3.png`.
+
+```text
+Make a final flat SIDE-VIEW GAME MODEL illustration of the fictional Spear II vehicle.
+FIRST image is the DESIGN to preserve: chunky central armored hull, one visible big SIDE-MOUNTED ENGINE beside the rear half (the opposite-side engine is occluded behind it), wedge nose, long horizontal nose barrel, one red-tipped shoulder missile shape above the engine, tiny underside turret, olive and dark steel mechanical paint with dark outlines.
+SECOND image is ONLY the CAMERA / 2D PROJECTION reference: perfectly horizontal, level, flat side elevation, right-facing, its broad side surfaces parallel to the image plane. Match that projection exactly. DO NOT copy its two vertically stacked rear engines. Keep the FIRST image's one visible side engine.
+Remove the FIRST image's overhead angle and exaggerated depth. The central upper hull must look like a horizontal side wall, NOT a broad sloping top deck; all parallel longitudinal seams horizontal. The visible engine is a straight horizontal side silhouette; its front intake is an extremely narrow edge at the right end, NOT a visible oval or circular face. Nose barrel and lower turret point directly right parallel to the picture plane. The missile above the engine points horizontally right. No top-down surfaces, no foreshortening, no 3/4 angle. One compact connected fictional unmanned game vehicle, all elements in side profile. Flat 2D cel shaded game asset style with thick clear black outline and restrained surface details, no dramatic lighting. Keep the warm very light grey backdrop and broad horizontal composition. No people, action, terrain, text, inset, or second vehicle. Entire model fits inside canvas.
+```
+

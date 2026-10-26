@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "status": "v2_visual_revision_and_animation_preview",
+  "status": "archangel_v2_preview_spear_v3_side_model",
   "tier": 2,
   "branch": "air",
   "generated_with": "imagegen",
@@ -44,11 +44,27 @@
       "height": 887,
       "mode": "RGBA",
       "sha256": "360e426ccfe70458b1432c62230a718bb1c3e6fba2401088740612836fffd2da"
+    },
+    {
+      "name": "Копьё II — боковая модель V3",
+      "file": "images/spear-ii-v3.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGB",
+      "sha256": "459e35492852b648e8d391f3722fb166677fb46a59d336b9c49cabcc7205a926"
+    },
+    {
+      "name": "Копьё II — промежуточный боковой эскиз V3",
+      "file": "images/spear-ii-v3-side-study.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGB",
+      "sha256": "8ba7d22e2c1c662b37e1816befaa5082e8292d96ceb550294fee4b7483937090"
     }
   ],
   "author_direction": {
     "archangel": "Retain cruiser; vertical missile launch through opening top hatches.",
-    "spear": "Wide hull with two lateral engine nacelles."
+    "spear": "Wide hull with two lateral engine nacelles; strict right-facing side elevation. Far nacelle is occluded by near nacelle."
   },
   "revision_date": "2026-10-26",
   "animations": [
